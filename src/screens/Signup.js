@@ -81,6 +81,16 @@ export default function Signup() {
               <input type="email" className="form-control" name='email' value={credentials.email} onChange={onChange} aria-describedby="emailHelp" />
             </div>
             <div className="m-3">
+            <label htmlFor="dobYear" className="form-label">Year of Birth</label>
+      <select className="form-select" name="dobYear" value={credentials.dobYear} onChange={onChange}>
+        <option value="">Select Year</option>
+        {[...Array(100)].map((_, index) => {
+          const year = new Date().getFullYear() - index;
+          return <option key={year} value={year}>{year}</option>;
+        })}
+      </select>
+            </div>
+            <div className="m-3">
               <label htmlFor="address" className="form-label">Address</label>
               <fieldset>
                 <input type="text" className="form-control" name='address' placeholder='"Click below for fetching address"' value={address} onChange={(e)=>setAddress(e.target.value)} aria-describedby="emailHelp" />

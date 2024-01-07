@@ -130,6 +130,7 @@ router.post('/getlocation', async (req, res) => {
 
     }
 })
+
 router.post('/foodData', async (req, res) => {
     try {
         // console.log( JSON.stringify(global.foodData))
@@ -149,7 +150,7 @@ router.post('/orderData', async (req, res) => {
     console.log("1231242343242354",req.body.email)
 
     //if email not exisitng in db then create: else: InsertMany()
-    let eId = await Order.findOne({ 'email': req.body.email })    
+    let eId = await Order.findOne({ 'email': req.body.email })
     console.log(eId)
     if (eId===null) {
         try {
@@ -190,8 +191,21 @@ router.post('/myOrderData', async (req, res) => {
     } catch (error) {
         res.send("Error",error.message)
     }
-    
+
 
 });
+
+// router.post('/admin', async(req, res) => {
+//     try {
+//         const userId = req.user.id;
+//         const user = await User.findById(userId).select("-password") // -password will not pick password from db.
+//         res.send(user)
+//     } catch (error) {
+//         console.error(error.message)
+//         res.send("Server Error")
+
+//     }
+
+// })
 
 module.exports = router
