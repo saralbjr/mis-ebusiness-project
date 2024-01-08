@@ -45,10 +45,14 @@ const AdminAdd = () => {
             const response = await axios.post('http://localhost:5000/api/auth/items/add', {
                 name: itemData.name,
                 CategoryName: itemData.categoryName,
-                options: [
-                    { "330ML": itemData.option330MLPrice },
-                    { "650ML": itemData.option650MLPrice }
-                ]
+                options:[
+                {
+                    "330ML": itemData.option330MLPrice,
+                    "650ML": itemData.option650MLPrice
+                }
+            ],
+                imageUrl: itemData.imageUrl
+
             });
 
             if (response.data.success) {

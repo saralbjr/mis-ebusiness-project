@@ -30,3 +30,13 @@
     text-align: center;
     padding-top: 30px;
   }
+
+  .container-dark{
+    background-color: #343a40; /* You can adjust the background color as needed */
+    color: #fff; /* Text color */
+    padding: 20px; /* Adjust padding as needed */
+    border-radius: 10px; /* Optional: Add border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle box shadow */
+    width: 300px;
+    margin: 50px auto;
+}

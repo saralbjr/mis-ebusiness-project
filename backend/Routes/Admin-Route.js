@@ -124,4 +124,37 @@ router.delete('/items/delete/:itemId', async (req, res) => {
   }
 });
 
+
+router.put('/items/update/:itemId', async (req, res) => {
+  const itemId = req.params.itemId;
+  const { name, CategoryName, options, imageUrl } = req.body;
+
+  try {
+    const collection = global.db.collection(collectionName);
+
+    // Update the item in the MongoDB collection
+    const result = await collection.updateOne(
+      { _id: mongodb.ObjectID(itemId) },
+      {
+        $set: {
+          name,
+          CategoryName,
+          options,
+          img: imageUrl,
+        }
+      }
+    );
+
+    if (result.modifiedCount === 1) {
+      res.json({ success: true, message: 'Item updated successfully' });
+    } else {
+      res.status(404).json({ success: false, message: 'Item not found' });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
 module.exports = router;
