@@ -15,7 +15,7 @@ import Signup from './screens/Signup';
 import { CartProvider } from './components/ContextReducer';
 import MyOrder from './screens/MyOrder';
 import Admin from './screens/Admin/Admin.js'
-
+import AdminAdd from './screens/Admin/AdminAdd.js'
 
 function App() {
   return (
@@ -28,6 +28,8 @@ function App() {
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/myorder" element={<MyOrder />} />
             <Route exact path="/admin" element={<Admin/>}/>
+            <Route path="/admin/add" element={<AdminAdd />} /> {/* Add this route */}
+
           </Routes>
         </div>
       </Router>

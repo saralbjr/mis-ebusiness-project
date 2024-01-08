@@ -63,7 +63,7 @@ export default function Card(props) {
 
   useEffect(() => {
     setSize(priceRef.current.value)
-  }, [])
+  }, [options])
 
   // useEffect(()=>{
   // checkBtn();

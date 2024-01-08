@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/auth', require('./Routes/Auth'));
-app.use('/api/auth', require('./Routes/Admin'))
+app.use('/api/auth', require('./Routes/Admin-Route'))
 
 app.listen(port, () => {
   console.log(`Example app listening on http://localhost:${port}`)

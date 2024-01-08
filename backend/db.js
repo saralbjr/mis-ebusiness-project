@@ -8,7 +8,7 @@ module.exports = function (callback) {
         if (err) console.log("---" + err)
         else {
             // var database =
-            console.log("connected to mongo")
+            console.log("Connected to MongoDB")
             const foodCollection = await mongoose.connection.db.collection("Drink_Items");
             foodCollection.find({}).toArray(async function (err, data) {
                 const categoryCollection = await mongoose.connection.db.collection("Drink_Category");
