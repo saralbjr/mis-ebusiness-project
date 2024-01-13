@@ -40,12 +40,19 @@ export default function Home() {
           <div className="carousel-inner " id='carousel'>
             <div class=" carousel-caption  " style={{ zIndex: "9" }}>
               <div className=" d-flex justify-content-center">  {/* justify-content-center, copy this <form> from navbar for search box */}
-                <input className="form-control me-2 w-75 bg-white text-dark" type="search" placeholder="Search in here..." aria-label="Search" value={search} onChange={(e) => { setSearch(e.target.value) }} />
-                <button className="btn text-white bg-danger" onClick={() => { setSearch('') }}>X</button>
+                <input className="form-control me-2 w-50 bg-white text-dark"
+                  type="search" placeholder="Search in here..." aria-label="Search" value={search}
+                  onChange={(e) => { setSearch(e.target.value) }} />
+                <button className="btn text-white bg-danger"
+                  onClick={() => { setSearch('') }}>X</button>
               </div>
             </div>
+
             <div className="carousel-item active" >
               <img src="https://cheers.com.np/uploads/banners/085371670808023255176239.jpg" className="d-block w-100  " style={{ filter: "brightness(30%)" }} alt="..." />
+            </div>
+            <div className="carousel-item active" >
+              <img src="https://cheers.com.np/uploads/banners/17311273094043477467413.jpg" className="d-block w-100  " style={{ filter: "brightness(30%)" }} alt="..." />
             </div>
             <div className="carousel-item">
               <img src="https://cheers.com.np/uploads/banners/4399799185307625465550.jpg" className="d-block w-100 " style={{ filter: "brightness(30%)" }} alt="..." />
@@ -65,43 +72,39 @@ export default function Home() {
         </div>
       </div>
       <div className='container'> {/* boootstrap is mobile first */}
-      {
-  foodCat !== []
-    ? foodCat.map((data) => {
-        return (
-          // justify-content-center
-          <div className='row mb-3' key={data.id}>
-            <div className='fs-3 m-3'>{data.CategoryName}</div>
-            <hr id="hr-success" style={{ height: "4px", backgroundImage: "-webkit-linear-gradient(left,rgb(0, 255, 137),rgb(0, 0, 0))" }} />
-            {foodItems !== [] ? foodItems.filter(
-              (items) => (items.CategoryName === data.CategoryName) && (items.name.toLowerCase().includes(search.toLowerCase())))
-              .map(filterItems => {
-                return (
-                  <div key={filterItems.id} className='col-12 col-md-6 col-lg-3'>
-                    {console.log(filterItems.url)}
-                    <Card foodName={filterItems.name} item={filterItems} options={filterItems.options[0]} ImgSrc={filterItems.img}></Card>
-                  </div>
-                )
-              }) : <div> No Such Data </div>}
-          </div>
-        )
-      })
-    : ""
-}
+        {
+          foodCat !== []
+            ? foodCat.map((data) => {
+              return (
+                // justify-content-center
+                <div className='row mb-3' key={data.id}>
+                  <div className='fs-3 m-3'>{data.CategoryName}</div>
+                  <hr id="hr-success" style={{
+                    height: "4px", backgroundImage:
+                      "-webkit-linear-gradient(left,rgb(0, 255, 137),rgb(0, 0, 0))"
+                  }} />
+                  {foodItems !== [] ? foodItems.filter(
+                    (items) => (items.CategoryName === data.CategoryName) &&
+                      (items.name.toLowerCase().includes(search.toLowerCase())))
+                    .map(filterItems => {
+                      return (
+                        <div key={filterItems.id} className='col-12 col-md-6 col-lg-3'>
+                          {console.log(filterItems.url)}
+                          <Card foodName={filterItems.name} item={filterItems}
+                            options={filterItems.options[0]} ImgSrc={filterItems.img}></Card>
+                        </div>
+                      )
+                    }) : <div> No Such Data </div>}
+                </div>
+              )
+            })
+            : ""
+        }
 
       </div>
       <hr></hr>
       <br></br>
       <Footer />
     </div>
-
-
-
-
-
-
-
-
-
   )
 }
