@@ -102,8 +102,6 @@ export default function Home() {
         }
 
       </div>
-      <hr></hr>
-      <br></br>
       <Footer />
     </div>
   )
