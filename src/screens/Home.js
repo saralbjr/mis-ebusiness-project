@@ -52,7 +52,7 @@ export default function Home() {
                 <div class=" carousel-caption  " style={{ zIndex: "9" }}>
                   <div className=" d-flex justify-content-center">
                     <input
-                      className="form-control me-2 w-50 bg-white text-dark"
+                      className="form-control me-1 w-50 bg-white text-dark"
                       type="search"
                       placeholder="Search in here..."
                       aria-label="Search"

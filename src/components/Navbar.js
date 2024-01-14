@@ -14,11 +14,14 @@ export default function Navbar(props) {
     const [cartView, setCartView] = useState(false)
     localStorage.setItem('temp', "first")
     let navigate = useNavigate();
-    const handleLogout = () => {
-        localStorage.removeItem('token')
 
-        navigate("/login")
+     const handleLogout = () => {
+    const isConfirmed = window.confirm("Are you sure you want to logout?");
+    if (isConfirmed) {
+      localStorage.removeItem('token');
+      navigate("/login");
     }
+  };
 
     const loadCart = () => {
         setCartView(true)

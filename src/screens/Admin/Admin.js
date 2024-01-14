@@ -5,9 +5,11 @@ import './Admin.css'; // Import your CSS file
 import AdminAdd from './AdminAdd';
 import { Button, Modal, Form } from 'react-bootstrap';
 import Login from './AdminLogin';
+import Loading from '../Loading';
 
 const Admin = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editedItem, setEditedItem] = useState({
@@ -20,24 +22,29 @@ const Admin = () => {
   });
 
   useEffect(() => {
-    // Check if the user is logged in
-    const storedLoginStatus = localStorage.getItem('adminLoggedIn');
-    if (storedLoginStatus === 'true') {
-      setLoggedIn(true);
-    }
+    const fetchData = async () => {
+      try {
+        // Check if the user is logged in
+        const storedLoginStatus = localStorage.getItem('adminLoggedIn');
+        if (storedLoginStatus === 'true') {
+          setLoggedIn(true);
+        }
 
-    if (isLoggedIn) {
-      const fetchItems = async () => {
-        try {
+        if (isLoggedIn) {
           const response = await axios.get('http://localhost:5000/api/auth/items');
           setItems(response.data);
-        } catch (error) {
-          console.error(error.message);
         }
-      };
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        // Set loading to false whether the data fetching is successful or not
+        setTimeout(() => {
+          setLoading(false);
+        }, 1500);
+      }
+    };
 
-      fetchItems();
-    }
+    fetchData();
   }, [isLoggedIn]);
 
   const handleDelete = async (itemId) => {
@@ -45,7 +52,6 @@ const Admin = () => {
     if (isConfirmed) {
       try {
         const response = await axios.delete(`http://localhost:5000/api/auth/items/delete/${itemId}`);
-
         if (response.data.success) {
           setItems((prevItems) => prevItems.filter((item) => item._id !== itemId));
           console.log(response.data.message);
@@ -110,7 +116,9 @@ const Admin = () => {
   return (
     <>
       <Navbar />
-      {isLoggedIn ? (
+      {loading ? (
+        <Loading />
+      ) : isLoggedIn ? (
         <>
           <AdminAdd />
           <div className='admin-panel'>
@@ -218,10 +226,12 @@ const Admin = () => {
           </Modal>
         </>
       ) : (
-        <Login setLoggedIn={(status) => {
-          setLoggedIn(status);
-          localStorage.setItem('adminLoggedIn', status);
-        }} />
+        <Login
+          setLoggedIn={(status) => {
+            setLoggedIn(status);
+            localStorage.setItem('adminLoggedIn', status);
+          }}
+        />
       )}
     </>
   );
