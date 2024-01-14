@@ -40,3 +40,14 @@
     width: 300px;
     margin: 50px auto;
 }
+
+.btns{
+  background-color: rgb(130, 104, 198);
+  color: white;
+
+}
+
+.btns:hover{
+  background-color: thistle;
+  color: black;
+}

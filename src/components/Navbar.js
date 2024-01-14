@@ -15,13 +15,13 @@ export default function Navbar(props) {
     localStorage.setItem('temp', "first")
     let navigate = useNavigate();
 
-     const handleLogout = () => {
-    const isConfirmed = window.confirm("Are you sure you want to logout?");
-    if (isConfirmed) {
-      localStorage.removeItem('token');
-      navigate("/login");
-    }
-  };
+    const handleLogout = () => {
+        const isConfirmed = window.confirm("Are you sure you want to logout?");
+        if (isConfirmed) {
+            localStorage.removeItem('token');
+            navigate("/login");
+        }
+    };
 
     const loadCart = () => {
         setCartView(true)
@@ -34,8 +34,8 @@ export default function Navbar(props) {
                 style={{ boxShadow: "0px 10px 20px black", filter: 'blur(20)', position: "fixed", zIndex: "10", width: "100%" }}>
                 <div className="container-fluid">
                     <Link className="navbar-brand " to="/">
-                    <img src={logoImage} alt="Logo"
-                    style={{ width: "100px", height: "auto" }} />
+                        <img src={logoImage} alt="Logo"
+                            style={{ width: "100px", height: "auto" }} />
                     </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -52,21 +52,23 @@ export default function Navbar(props) {
                         </ul>
                         {(!localStorage.getItem("token")) ?
                             <form className="d-flex">
-                                <Link className="btn bg-white text-success mx-1 " to="/login">Login</Link>
-                                <Link className="btn bg-white text-success mx-1" to="/signup">Signup</Link>
+                                <div className='login'>
+                                    <Link className="btn bg-white text-success mx-1 " to="/login">Login</Link>
+                                    <Link className="btn bg-white text-success mx-1" to="/signup">Signup</Link>
+                                </div>
                             </form> :
-                            <div>
-
-                                <div className="btn bg-white text-success mx-2 " onClick={loadCart}>
+                            <div className='buttons'>
+                                <div className="animated-button" onClick={loadCart}>
                                     <Badge color="secondary" badgeContent={items.length} >
                                         <ShoppingCartIcon />
                                     </Badge>
                                     Cart
                                 </div>
-
-                                {cartView ? <Modal onClose={() => setCartView(false)}><Cart></Cart></Modal> : ""}
-
-                                <button onClick={handleLogout} className="btn bg-white text-success" >Logout</button></div>}
+                                {cartView ? <Modal onClose={() =>
+                                    setCartView(false)}><Cart></Cart></Modal> : ""}
+                                <button onClick={handleLogout} className="animated-button">
+                                    Logout</button>
+                            </div>}
                     </div>
                 </div>
             </nav>

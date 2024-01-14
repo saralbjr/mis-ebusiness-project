@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Modal, Form } from 'react-bootstrap';
+import './Admin.css'
 
 const AdminAdd = () => {
     const [showModal, setShowModal] = useState(false);
@@ -68,7 +69,7 @@ const AdminAdd = () => {
 
     return (
         <div className='edit-admin'>
-            <Button variant="primary" onClick={handleShow}>
+            <Button className="btns" onClick={handleShow}>
                 Add Item
             </Button>
 

@@ -9,7 +9,6 @@ export default function Home() {
   const [foodItems, setFoodItems] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
 
   const loadFoodItems = async () => {
     try {
@@ -51,35 +50,16 @@ export default function Home() {
             <div id="carouselExampleFade" className="carousel slide carousel-fade " data-bs-ride="carousel">
               <div className="carousel-inner " id='carousel'>
                 <div class=" carousel-caption  " style={{ zIndex: "9" }}>
-                <div className={`d-flex justify-content-center align-items-center ${isSearchExpanded ? 'expanded-search' : ''}`}>
-                    <div className="search-input-container">
-                      <input
-                        className="search-input form-control bg-white text-dark"
-                        type="search"
-                        placeholder="Search in here..."
-                        aria-label="Search"
-                        value={search}
-                        onChange={(e) => { setSearch(e.target.value) }}
-                        onFocus={() => setIsSearchExpanded(true)}
-                        onBlur={() => setIsSearchExpanded(false)}
-                      />
-                      {search && (
-                        <button
-                          className="close-button"
-                          onClick={() => { setSearch(''); setIsSearchExpanded(false); }}
-                        >
-                          X
-                        </button>
-                      )}
-                    </div>
-                    {!isSearchExpanded && (
-                      <button
-                        className="search-button"
-                        onClick={() => setIsSearchExpanded(true)}
-                      >
-                        🔍
-                      </button>
-                    )}
+                  <div className=" d-flex justify-content-center">
+                    <input
+                      className="form-control me-1 w-50 bg-white text-dark"
+                      type="search"
+                      placeholder="Search in here..."
+                      aria-label="Search"
+                      value={search}
+                      onChange={(e) => { setSearch(e.target.value) }}
+                    />
+                    <button className="btn text-white bg-danger" onClick={() => { setSearch('') }}>X</button>
                   </div>
                 </div>
                 <div className="carousel-item active" >

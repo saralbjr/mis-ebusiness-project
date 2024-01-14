@@ -155,8 +155,11 @@ const Admin = () => {
                       )}
                     </td>
                     <td>
-                      <button className='btn-danger btn-md me-2' onClick={() => handleDelete(item._id)}>Delete</button>
+                    <div className="d-flex justify-content-center align-items-center">
+                    <button className='btn-danger btn-md me-2' onClick={() => handleDelete(item._id)}>Delete</button>
                       <button className='btn-success btn-md' onClick={() => handleEdit(item)}>Edit</button>
+                    </div>
+
                     </td>
                   </tr>
                 ))}
