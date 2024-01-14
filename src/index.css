@@ -24,3 +24,42 @@ code {
 .carousalImg{
   object-fit: contain !important;
 }
+
+/* Add a CSS class for the expanded search bar */
+.expanded-search {
+  width: 200px;
+  transition: width 0.3s ease-in-out;
+}
+
+#carousel {
+  position: relative;
+}
+
+/* Style for the search button */
+.search-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Style for the search input */
+.search-input {
+  width: 0;
+  max-width: 200px;
+  padding: 5px;
+  transition: width 0.3s ease-in-out;
+}
+
+.close-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: #c82333;
+}
