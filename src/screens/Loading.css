@@ -1,0 +1,30 @@
+/* Loading.css */
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* 100% of the viewport height */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(33, 31, 31, 0.8); /* Optional: semi-transparent background */
+  }
+
+  .loading-image {
+    /* Optional: Add styling for your loading image */
+    width: 80px; /* Adjust the width as needed */
+    height: auto; /* Adjust the height as needed */
+    animation: scale 1.5s ease-in-out infinite; /* Adjust the animation duration and type as needed */
+
+  }
+
+  @keyframes scale {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }

@@ -7,7 +7,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useCart } from './ContextReducer';
 import Modal from '../Modal';
 import Cart from '../screens/Cart';
-import logoImage from './Images/bg.png'
+import logoImage from './Images/raksi1.png'
 
 export default function Navbar(props) {
 
@@ -27,7 +27,7 @@ export default function Navbar(props) {
     const items = useCart();
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-success position-sticky"
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark position-sticky"
                 style={{ boxShadow: "0px 10px 20px black", filter: 'blur(20)', position: "fixed", zIndex: "10", width: "100%" }}>
                 <div className="container-fluid">
                     <Link className="navbar-brand " to="/">
