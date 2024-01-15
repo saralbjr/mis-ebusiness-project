@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -8,6 +8,7 @@ import { useCart } from './ContextReducer';
 import Modal from '../Modal';
 import Cart from '../screens/Cart';
 import logoImage from './Images/raksi1.png'
+import './Navbar.css'
 
 export default function Navbar(props) {
 
@@ -28,9 +29,39 @@ export default function Navbar(props) {
     }
 
     const items = useCart();
+
+    const navbarRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+          if (entry.isIntersecting) {
+            navbar.classList.remove('sticky');
+          } else {
+            navbar.classList.add('sticky');
+          }
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (navbarRef.current) {
+      observer.observe(navbarRef.current);
+    }
+
+    return () => {
+      if (navbarRef.current) {
+        observer.unobserve(navbarRef.current);
+      }
+    };
+  }, []);
+
+
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark position-sticky"
+            <nav id="navbar" ref={navbarRef} className="navbar navbar-expand-lg navbar-dark bg-dark"
                 style={{ boxShadow: "0px 10px 20px black", filter: 'blur(20)', position: "fixed", zIndex: "10", width: "100%" }}>
                 <div className="container-fluid">
                     <Link className="navbar-brand " to="/">
