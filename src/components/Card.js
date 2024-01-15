@@ -98,7 +98,7 @@ export default function Card(props) {
       </div>
       <br />
       <div className="d-flex justify-content-center">
-        <button className={'add-to-cart'} onClick={handleAddToCart} style={{zIndex: 1}}>Add to Cart</button>
+        <button className={'btn btn-success'} onClick={handleAddToCart} style={{zIndex: 1}}>Add to Cart</button>
       </div>
     </div>
   </div>

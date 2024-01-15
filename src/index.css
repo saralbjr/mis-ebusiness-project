@@ -124,16 +124,3 @@ code {
     border-color: #28a745; /* Change border color on hover */
   }
 
-  .add-to-cart {
-    background-color: #6d5e8f; /* Slightly lighter than the dark background */
-    color: #ffffff; /* White text for contrast */
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  /* Add hover effect */
-  .add-to-cart:hover {
-    background-color: #514366; /* Slightly darker shade on hover for contrast */
-  }

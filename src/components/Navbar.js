@@ -51,11 +51,11 @@ export default function Navbar(props) {
       observer.observe(navbarRef.current);
     }
 
-    return () => {
-      if (navbarRef.current) {
-        observer.unobserve(navbarRef.current);
-      }
-    };
+    // return () => {
+    //   if (navbarRef.current) {
+    //     observer.unobserve(navbarRef.current);
+    //   }
+    // };
   }, []);
 
 

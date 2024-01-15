@@ -36,12 +36,13 @@ export default function Login() {
   }
 
   return (
-    <div style={{backgroundImage: 'url("https://cdn.vox-cdn.com/thumbor/8zX9C04GCHA9HvJR7PjsJneqLUg=/0x0:2600x1733/1200x800/filters:focal(1092x659:1508x1075)/cdn.vox-cdn.com/uploads/chorus_image/image/66554227/shutterstock_616076909.0.jpg")', height: '100vh', backgroundSize: 'cover' }}>
+    <div style={{ backgroundImage: 'url("https://cdn.vox-cdn.com/thumbor/8zX9C04GCHA9HvJR7PjsJneqLUg=/0x0:2600x1733/1200x800/filters:focal(1092x659:1508x1075)/cdn.vox-cdn.com/uploads/chorus_image/image/66554227/shutterstock_616076909.0.jpg")', height: '100vh', backgroundSize: 'cover' }}>
       <div>
         <Navbar />
       </div>
+      <br /> <br /> <br /><br /><br /> <br /> <br />  <br/>
       <div className='container'>
-        <form className='w-50 m-auto mt-5 border bg-dark border-success rounded' onSubmit={handleSubmit}>
+        <form className='w-50 m-auto mt-10 border bg-dark border-success rounded' onSubmit={handleSubmit}>
           <div className="m-3">
             <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
             <input type="email" className="form-control" name='email' value={credentials.email} onChange={onChange} aria-describedby="emailHelp" />
