@@ -42,6 +42,7 @@ export default function Home() {
       <div>
         <Navbar />
       </div>
+      <br/> <br/> <br/> <br/>
       <div>
         {loading ? (
           <Loading />
