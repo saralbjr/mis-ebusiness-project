@@ -30,46 +30,42 @@ const OrderInfo = () => {
     <div>
     <Navbar />
     <br /> <br /> <br />
-    <div className='container'>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div>
-          <h3 className="mt-4 mb-4">All Orders</h3>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Email</th>
-                <th>Item Name</th>
-                <th>Item Qty</th>
-                <th>Item Price</th>
-                <th>Date</th>
-                <th>Total Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orderData.map((order) => (
-                <tr key={order._id}>
-                  <td>{order.email}</td>
-                  {order.order_data.map((item) => (
-                    <React.Fragment key={item.id}>
-                      <td>{item.name}</td>
-                      <td>{item.qty}</td>
-                      <td>{item.price}</td>
-                      <td>{new Date(item.Order_date).toLocaleDateString()}</td>
-                      <td>{item.qty * item.price}</td>
-                    </React.Fragment>
-                  ))}
+    {loading ? (
+      <Loading />
+    ) : (
+      <div className='container'>
+        <h3 className="mt-4 mb-4">User Orders</h3>
+        {orderData.map((userOrder, index) => (
+          <div key={index}>
+            <h4>User: {userOrder.email}</h4>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Item Name</th>
+                  <th>Item Qty</th>
+                  <th>Item Price</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </div>
-    <br />
+              </thead>
+              <tbody>
+                {userOrder.order_data.map((order, orderIndex) => (
+                  <tr key={orderIndex}>
+                    <td>{order.find((item) => item.Order_date)?.Order_date}</td>
+                    <td>{order.find((item) => item.id)?.name}</td>
+                    <td>{order.find((item) => item.id)?.qty}</td>
+                    <td>{order.find((item) => item.id)?.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <hr />
+          </div>
+        ))}
+      </div>
+    )}
   </div>
-  )
-}
+);
+};
+
 
 export default OrderInfo

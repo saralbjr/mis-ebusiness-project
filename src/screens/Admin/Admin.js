@@ -117,15 +117,15 @@ const Admin = () => {
   return (
     <>
       <Navbar />
-      <br/> <br/> <br/> <br/> <br/>
-    <div className='d-flex justify-content-center'>
-    <Link to="/user-orders" className="btn btn-primary">
-            View User Orders
-          </Link>
-          <Link to="/user-data" className="btn btn-primary">
-            View User Data
-          </Link>
-    </div>
+      <br /> <br /> <br /> <br /> <br />
+      <div className='d-flex justify-content-center'>
+        <Link to="/admin/ordersdata" className="btn btn-primary">
+          View User Orders
+        </Link>
+        <Link to="/admin/usersdata" className="btn btn-primary">
+          View User Data
+        </Link>
+      </div>
       {loading ? (
         <Loading />
       ) : isLoggedIn ? (
@@ -165,10 +165,10 @@ const Admin = () => {
                       )}
                     </td>
                     <td>
-                    <div className="d-flex justify-content-center align-items-center">
-                    <button className='btn-danger btn-md me-2' onClick={() => handleDelete(item._id)}>Delete</button>
-                      <button className='btn-success btn-md' onClick={() => handleEdit(item)}>Edit</button>
-                    </div>
+                      <div className="d-flex justify-content-center align-items-center">
+                        <button className='btn-danger btn-md me-2' onClick={() => handleDelete(item._id)}>Delete</button>
+                        <button className='btn-success btn-md' onClick={() => handleEdit(item)}>Edit</button>
+                      </div>
 
                     </td>
                   </tr>
