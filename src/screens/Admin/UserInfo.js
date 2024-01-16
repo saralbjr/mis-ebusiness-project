@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import Loading from '.././Loading';
+import { Link } from 'react-router-dom';
 
 const UserInfo = () => {
   const [userData, setUserData] = useState([]);
@@ -46,12 +47,17 @@ const UserInfo = () => {
   return (
     <div>
       <Navbar />
-      <br /> <br /> <br /> <br/>
+      <br /> <br /> <br /> <br/> <br/>
+      <div className='d-flex justify-content-center'>
+        <Link to="/admin/ordersdata" className="btn btn-primary">
+          Go to Orders Data
+        </Link>
+      </div>
       {loading ? (
         <Loading />
       ) : (
         <div className='container'>
-          <h3 className="mt-4 mb-4 d-flex justify-content-center">User Information</h3>
+          <h3 className="fs-7 mt-4 mb-4 d-flex justify-content-center">User Information</h3>
           <table className="table">
             <thead>
               <tr>
