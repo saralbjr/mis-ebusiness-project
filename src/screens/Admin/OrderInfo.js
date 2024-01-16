@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
 import Loading from '.././Loading';
 import { Link } from 'react-router-dom';
@@ -11,9 +10,12 @@ const OrderInfo = () => {
   const fetchAllOrders = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/auth/allOrders");
-
       const data = await response.json();
-      setorderData(data);
+
+      // Sort the order data by ordered date in descending order
+      const sortedOrders = data.sort((a, b) => new Date(b.order_data[0][0].Order_date) - new Date(a.order_data[0][0].Order_date));
+
+      setorderData(sortedOrders);
 
       setTimeout(() => {
         setLoading(false);
@@ -27,6 +29,7 @@ const OrderInfo = () => {
   useEffect(() => {
     fetchAllOrders();
   }, []);
+
   return (
     <div>
       <Navbar />
@@ -73,5 +76,4 @@ const OrderInfo = () => {
   );
 };
 
-
-export default OrderInfo
+export default OrderInfo;
