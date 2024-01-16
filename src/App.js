@@ -16,6 +16,8 @@ import { CartProvider } from './components/ContextReducer';
 import MyOrder from './screens/MyOrder';
 import Admin from './screens/Admin/Admin.js'
 import AdminAdd from './screens/Admin/AdminAdd.js'
+import OrderInfo from './screens/Admin/OrderInfo.js';
+import UserInfo from './screens/Admin/UserInfo.js';
 
 function App() {
   return (
@@ -29,7 +31,8 @@ function App() {
             <Route exact path="/myorder" element={<MyOrder />} />
             <Route exact path="/admin" element={<Admin/>}/>
             <Route path="/admin/add" element={<AdminAdd />} /> {/* Add this route */}
-
+            <Route path="/admin/orderdata" element={<OrderInfo />} />
+            <Route path="/admin/userdata" element={<UserInfo />} />
           </Routes>
         </div>
       </Router>

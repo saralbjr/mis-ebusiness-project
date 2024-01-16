@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Navbar from '../../components/Navbar';
 import './Admin.css'; // Import your CSS file
 import AdminAdd from './AdminAdd';
@@ -117,6 +118,14 @@ const Admin = () => {
     <>
       <Navbar />
       <br/> <br/> <br/> <br/> <br/>
+    <div className='d-flex justify-content-center'>
+    <Link to="/user-orders" className="btn btn-primary">
+            View User Orders
+          </Link>
+          <Link to="/user-data" className="btn btn-primary">
+            View User Data
+          </Link>
+    </div>
       {loading ? (
         <Loading />
       ) : isLoggedIn ? (

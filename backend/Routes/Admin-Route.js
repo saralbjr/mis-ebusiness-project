@@ -8,6 +8,8 @@ const mongoURI = 'mongodb+srv://saralbjr1:saral123@cluster0.yvg1dbw.mongodb.net/
 const dbName = 'DrinkMandu';
 const collectionName = 'Drink_Items';
 const categoryCollection = 'Drink_Category';
+const userCollection = 'users'; // Assuming the collection name for user details
+const orderDetails = 'orders'
 
 router.use(cors())
 
@@ -156,5 +158,29 @@ router.put('/items/update/:itemId', async (req, res) => {
   }
 });
 
+router.get('/users', async (req, res) => {
+  try {
+    const collection = global.db.collection(userCollection);
+    const users = await collection.find().toArray();
+    res.json(users);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// Modify your existing code to include a new route for fetching all order data
+router.get('/allOrders', async (req, res) => {
+  try {
+    const collection = global.db.collection(orderDetails); // Replace 'orders' with the actual name of your collection
+    // Fetch all order data from the collection
+    const allOrders = await collection.find().toArray();
+
+    res.json(allOrders);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
