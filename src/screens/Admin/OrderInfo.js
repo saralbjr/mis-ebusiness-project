@@ -29,12 +29,12 @@ const OrderInfo = () => {
   return (
     <div>
     <Navbar />
-    <br /> <br /> <br />
+    <br /> <br /> <br /> <br/>
     {loading ? (
       <Loading />
     ) : (
       <div className='container'>
-        <h3 className="mt-4 mb-4">User Orders</h3>
+        <h3 className="mt-4 mb-4 d-flex justify-content-center">User Orders</h3>
         {orderData.map((userOrder, index) => (
           <div key={index}>
             <h4>User: {userOrder.email}</h4>

@@ -183,4 +183,24 @@ router.get('/allOrders', async (req, res) => {
   }
 });
 
+// Add a new route to handle the DELETE request for banning a user
+router.delete('/users/ban/:userId', async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const collection = global.db.collection(userCollection);
+    const result = await collection.deleteOne({ _id: mongodb.ObjectID(userId) });
+
+    if (result.deletedCount === 1) {
+      res.json({ success: true, message: 'User banned successfully' });
+    } else {
+      res.status(404).json({ success: false, message: 'User not found' });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
 module.exports = router;
