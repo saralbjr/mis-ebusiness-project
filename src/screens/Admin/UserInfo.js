@@ -13,7 +13,11 @@ const UserInfo = () => {
       try {
         const response = await fetch("http://localhost:5000/api/auth/users");
         const data = await response.json();
-        setUserData(data);
+
+        // Sort the user data by date in descending order
+        const sortedUsers = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        setUserData(sortedUsers);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching user data:', error);
