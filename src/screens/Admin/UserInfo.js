@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
-import Loading from '.././Loading';
+import Loading from '../Loading';
 import { Link } from 'react-router-dom';
 
 const UserInfo = () => {
   const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [banMessage, setBanMessage] = useState('');
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -32,11 +33,15 @@ const UserInfo = () => {
         });
 
         if (response.ok) {
-          // Update the user data after banning the user
-          const updatedUserData = userData.filter(user => user._id !== userId);
-          setUserData(updatedUserData);
+          setUserData((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+          setBanMessage('User banned successfully');
+
+          // Clear the ban message after 3 seconds (adjust the timeout duration as needed)
+          setTimeout(() => {
+            setBanMessage('');
+          }, 1800);
         } else {
-          console.log('Failed to ban user.');
+          setBanMessage('Failed to ban user.');
         }
       } catch (error) {
         console.error('Error banning user:', error);
@@ -82,6 +87,18 @@ const UserInfo = () => {
               ))}
             </tbody>
           </table>
+
+          {banMessage && (
+            <div className="modal fade show" tabIndex="-1" role="dialog" style={{ display: 'block', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+              <div className="modal-dialog modal-dialog-centered" role="document">
+                <div className="modal-content">
+                  <div className="modal-body">
+                    <p>{banMessage}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
