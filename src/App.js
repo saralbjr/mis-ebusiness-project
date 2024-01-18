@@ -15,6 +15,7 @@ import Signup from './screens/Signup';
 import { CartProvider } from './components/ContextReducer';
 import MyOrder from './screens/MyOrder';
 import Admin from './screens/Admin/Admin.js'
+import AdminLogin from './screens/Admin/AdminLogin.js'
 import AdminAdd from './screens/Admin/AdminAdd.js'
 import OrderInfo from './screens/Admin/OrderInfo.js';
 import UserInfo from './screens/Admin/UserInfo.js';
@@ -33,6 +34,7 @@ function App() {
             <Route path="/admin/add" element={<AdminAdd />} /> {/* Add this route */}
             <Route path="/admin/ordersdata" element={<OrderInfo />} />
             <Route path="/admin/usersdata" element={<UserInfo />} />
+            <Route path="/adminlogin" element={<AdminLogin />} />
           </Routes>
         </div>
       </Router>

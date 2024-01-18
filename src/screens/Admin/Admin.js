@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import Navbar from '../../components/Navbar';
+import AdminNavBar from './AdminNavBar'
 import './Admin.css'; // Import your CSS file
 import AdminAdd from './AdminAdd';
 import { Button, Modal, Form } from 'react-bootstrap';
@@ -116,20 +116,20 @@ const Admin = () => {
 
   return (
     <>
-      <Navbar />
-      <br /> <br /> <br /> <br /> <br />
-      <div className='d-flex justify-content-center'>
-        <Link to="/admin/ordersdata" className="btn btn-primary">
-          View User Orders
-        </Link>
-        <Link to="/admin/usersdata" className="btn btn-primary">
-          View User Data
-        </Link>
-      </div>
+      <AdminNavBar />
+      <br /> <br /> <br /> <br /> <br/>
       {loading ? (
         <Loading />
       ) : isLoggedIn ? (
         <>
+        <div className='d-flex justify-content-center'>
+        <Link to="/admin/ordersdata" className="btn btn-success mx-2">
+          View User Orders
+        </Link>
+        <Link to="/admin/usersdata" className="btn btn-success">
+          View User Data
+        </Link>
+      </div>
           <AdminAdd />
           <div className='admin-panel'>
             <h1 className='admin-heading'>Admin Dashboard</h1>

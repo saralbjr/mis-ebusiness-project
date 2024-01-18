@@ -1,0 +1,10 @@
+#navbar {
+    transition: 0.3s;
+  }
+
+  #navbar.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+  }

@@ -61,7 +61,7 @@ export default function Navbar(props) {
 
     return (
         <div>
-            <nav id="navbar" ref={navbarRef} className="navbar navbar-expand-lg navbar-dark bg-dark"
+            <nav id="navbar" ref={navbarRef} className="navbar navbar-expand-lg navbar-dark bg-success"
                 style={{ boxShadow: "0px 10px 20px black", filter: 'blur(20)', position: "fixed", zIndex: "10", width: "100%" }}>
                 <div className="container-fluid">
                     <Link className="navbar-brand " to="/">

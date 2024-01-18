@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../../components/Navbar';
+import AdminNavBar from './AdminNavBar';
 import Loading from '.././Loading';
 import { Link } from 'react-router-dom';
+import './Admin.css'
 
 const OrderInfo = () => {
   const [orderData, setorderData] = useState([]);
@@ -32,11 +33,14 @@ const OrderInfo = () => {
 
   return (
     <div>
-      <Navbar />
+      <AdminNavBar />
       <br /> <br /> <br /> <br /> <br/>
-      <div className='d-flex justify-content-center'>
-        <Link to="/admin/usersdata" className="btn btn-primary">
-          Go to Users Data
+      <div className='btn-container d-flex justify-content-center'>
+      <Link to="/admin" className='btn btn-success mx-2'>
+       View Products
+      </Link>
+        <Link to="/admin/usersdata" className="btn btn-success">
+          View Users
         </Link>
       </div>
       {loading ? (
@@ -49,10 +53,11 @@ const OrderInfo = () => {
               <h4>User: {userOrder.email}</h4>
               <table className="table">
                 <thead>
-                  <tr>
+                  <tr className='orderinfo'>
                     <th>Ordered Date</th>
                     <th>Item Name</th>
                     <th>Item Qty</th>
+                    <th>Item Size</th>
                     <th>Total Price</th>
                   </tr>
                 </thead>
@@ -62,6 +67,7 @@ const OrderInfo = () => {
                       <td>{order.find((item) => item.Order_date)?.Order_date}</td>
                       <td>{order.find((item) => item.id)?.name}</td>
                       <td>{order.find((item) => item.id)?.qty}</td>
+                      <td>{order.find((item) => item.id)?.size}</td>
                       <td>{order.find((item) => item.id)?.price}</td>
                     </tr>
                   ))}

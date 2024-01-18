@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Admin.css';
+// import AdminNavBar from './AdminNavBar';
 
 const Login = ({ setLoggedIn }) => {
   const [username, setUsername] = useState('');
@@ -18,6 +19,8 @@ const Login = ({ setLoggedIn }) => {
   };
 
   return (
+    <>
+      {/* <AdminNavBar/> */}
     <div
       style={{
         backgroundImage:
@@ -51,6 +54,7 @@ const Login = ({ setLoggedIn }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

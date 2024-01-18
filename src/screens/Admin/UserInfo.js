@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../../components/Navbar';
+import AdminNavBar from './AdminNavBar';
 import Loading from '../Loading';
 import { Link } from 'react-router-dom';
 
@@ -55,11 +55,14 @@ const UserInfo = () => {
 
   return (
     <div>
-      <Navbar />
-      <br /> <br /> <br /> <br/> <br/>
+      <AdminNavBar />
+      <br /> <br /> <br /> <br /> <br />
       <div className='d-flex justify-content-center'>
-        <Link to="/admin/ordersdata" className="btn btn-primary">
-          Go to Orders Data
+      <Link to="/admin" className='btn btn-success mx-2'>
+        View Products
+      </Link>
+        <Link to="/admin/ordersdata" className="btn btn-success">
+          View Orders
         </Link>
       </div>
       {loading ? (
@@ -69,7 +72,7 @@ const UserInfo = () => {
           <h3 className="fs-7 mt-4 mb-4 d-flex justify-content-center">User Information</h3>
           <table className="table">
             <thead>
-              <tr>
+              <tr className='userinfo'>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Date</th>

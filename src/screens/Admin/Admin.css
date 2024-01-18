@@ -16,7 +16,14 @@
     margin-top: 20px;
   }
 
-  .admin-table th, .admin-table td {
+  .admin-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    background-color: #6d9b6a;
+  }
+
+  .admin-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
@@ -50,4 +57,53 @@
 .btns:hover{
   background-color: thistle;
   color: black;
+}
+
+/* Add this to your Admin.css file */
+
+.container {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #4e504e; /* Green background color */
+  color: white; /* White text color */
+}
+.orderinfo {
+  background-color: #6d9b6a; /* Green background color */
+  color: white; /* White text color */
+}
+ .userinfo {
+  background-color: #6d9b6a; /* Green background color */
+  color: white; /* White text color */
+}
+
+tr:hover {
+  background-color: #343a40;
+}
+
+.btn-container {
+  margin-top: 20px;
+}
+
+/* Add these styles to make buttons consistent */
+.btn {
+  margin-right: 10px;
+}
+
+/* Add a bit of spacing between buttons */
+.btn + .btn {
+  margin-left: 10px;
 }

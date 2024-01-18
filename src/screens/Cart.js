@@ -84,7 +84,7 @@ export default function Cart() {
                 <th scope='col'>Quantity</th>
                 <th scope='col'>Option</th>
                 <th scope='col'>Amount</th>
-                <th scope='col'></th>
+                <th scope='col'>Delete</th>
               </tr>
             </thead>
             <tbody>
