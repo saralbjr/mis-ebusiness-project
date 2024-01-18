@@ -74,36 +74,34 @@ export default function Card(props) {
   // console.log(totval)
   return (
     <div className='mb-4'>
-  <div className="card mt-3" style={{ width: "18rem", maxHeight: "360px" }}>
-    <img src={props.ImgSrc} className="card-img-top" alt="..." style={{ height: "250px", objectFit: "contain" }} />
-    <div className="card-body">
-      <h5 className="card-title d-flex justify-content-center">{props.foodName}</h5>
-      {/* <p className="card-text">This is some random text. This is description.</p> */}
-      <div className='container w-100 p-0' style={{ height: "38px" }}>
-        <select className="m-2 h-100 w-20 bg-success text-black rounded" style={{ select: "#FF0000" }} onClick={handleClick} onChange={handleQty}>
-          {Array.from(Array(10), (e, i) => {
-            return (
-              <option key={i + 1} value={i + 1}>{i + 1}</option>
-            )
-          })}
-        </select>
-        <select className="m-2 h-100 w-20 bg-success text-black rounded" style={{ select: "#FF0000" }} ref={priceRef} onClick={handleClick} onChange={handleOptions}>
-          {priceOptions.map((i) => {
-            return <option key={i} value={i}>{i}</option>
-          })}
-        </select>
-        <div className='d-inline ms-2 h-100 w-20 fs-5'>
-          Rs. {finalPrice}
+    <div className="card mt-3 d-flex flex-column" style={{ maxWidth: "18rem" }}>
+      <img src={props.ImgSrc} className="card-img-top" alt="..." style={{ height: "250px", objectFit: "contain" }} />
+      <div className="card-body">
+        <h5 className="card-title d-flex justify-content-center">{props.foodName}</h5>
+        <div className='container w-100 p-0' style={{ height: "38px" }}>
+          <select className="m-2 h-100 w-20 bg-success text-black rounded" style={{ select: "#FF0000" }} onClick={handleClick} onChange={handleQty}>
+            {Array.from(Array(10), (e, i) => {
+              return (
+                <option key={i + 1} value={i + 1}>{i + 1}</option>
+              )
+            })}
+          </select>
+          <select className="m-2 h-100 w-20 bg-success text-black rounded" style={{ select: "#FF0000" }} ref={priceRef} onClick={handleClick} onChange={handleOptions}>
+            {priceOptions.map((i) => {
+              return <option key={i} value={i}>{i}</option>
+            })}
+          </select>
+          <div className='d-inline ms-2 h-100 w-20 fs-5'>
+            Rs. {finalPrice}
+          </div>
         </div>
-      </div>
-      <br />
-      <div className="d-flex justify-content-center">
-        <button className={'btn btn-success'} onClick={handleAddToCart} style={{zIndex: 1}}>Add to Cart</button>
+        <br />
+        <div className='d-flex flex-column align-items-center justify-content-center mt-auto'>
+          <button className={'btn btn-success'} onClick={handleAddToCart}>Add to Cart</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-  )
+);
 }
 //
