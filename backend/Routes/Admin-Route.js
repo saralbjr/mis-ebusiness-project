@@ -3,14 +3,15 @@ const router = express.Router();
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const cors = require('cors')
+const dotenv = require('dotenv');
+dotenv.config();
 
-const mongoURI = 'mongodb+srv://saralbjr1:saral123@cluster0.yvg1dbw.mongodb.net/DrinkMandu?retryWrites=true&w=majority';
-const dbName = 'DrinkMandu';
-const collectionName = 'Drink_Items';
-const categoryCollection = 'Drink_Category';
-const userCollection = 'users'; // Assuming the collection name for user details
-const orderDetails = 'orders'
-
+const mongoURI = process.env.MONGO_URI;
+const dbName = process.env.DB_NAME;
+const collectionName = process.env.COLLECTION_NAME;
+const categoryCollection = process.env.CATEGORY_COLLECTION;
+const userCollection = process.env.USER_COLLECTION;
+const orderDetails = process.env.ORDER_DETAILS_COLLECTION;
 router.use(cors())
 
 // Ensure MongoDB connection is established before setting up routes

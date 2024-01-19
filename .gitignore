@@ -21,3 +21,7 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/.env
+
+G:\BCA\BCA 5th Sem\MIS and E-Business\MIS PROJECT\backend\.env
