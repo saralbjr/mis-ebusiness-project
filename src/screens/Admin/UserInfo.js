@@ -75,7 +75,7 @@ const UserInfo = () => {
               <tr className='userinfo'>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Date</th>
+                <th>Date Joined</th>
                 <th>Action</th>
               </tr>
             </thead>
