@@ -23,7 +23,7 @@ export default function Home() {
       setFoodItems(response[0]);
       setFoodCat(response[1]);
 
-      setTimeout(()=> {
+      setTimeout(() => {
         setLoading(false);
       }, 1500)
 
@@ -42,7 +42,7 @@ export default function Home() {
       <div>
         <Navbar />
       </div>
-      <br/> <br/> <br/> <br/>
+      <br /> <br /> <br /> <br />
       <div>
         {loading ? (
           <Loading />

@@ -11,19 +11,18 @@ import './Navbar.css';
 export default function Navbar(props) {
     const [cartView, setCartView] = useState(false);
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-    const [userName, setUserName] = useState('User'); // Default to "User"
+    const [userEmail, setUserEmail] = useState(''); // Default to empty string
 
     const navigate = useNavigate();
     const items = useCart();
     const navbarRef = useRef(null);
 
     useEffect(() => {
-        // Fetch user name from your authentication system or database
-        // For now, using a default value "User"
-        // Replace this with actual logic to fetch user name
-        const storedUserName = localStorage.getItem('userName');
-        if (storedUserName) {
-            setUserName(storedUserName);
+        const storedEmail = localStorage.getItem('userEmail');
+        if (storedEmail) {
+            // Use only the first 5 characters of the email
+            const truncatedEmail = storedEmail.substring(0, 5) + '...';
+            setUserEmail(truncatedEmail);
         }
     }, []);
 
@@ -35,7 +34,7 @@ export default function Navbar(props) {
         const isConfirmed = window.confirm('Are you sure you want to logout?');
         if (isConfirmed) {
             localStorage.removeItem('token');
-            localStorage.removeItem('userName');
+            localStorage.removeItem('userEmail');
             navigate('/login');
         }
     };
@@ -61,7 +60,7 @@ export default function Navbar(props) {
                 <div className="container-fluid">
                     <div className="profile-dropdown">
                         <div className="animated-button" onClick={handleProfileClick}>
-                            {userName} <span>&#9660;</span>
+                            {userEmail} <span>&#9660;</span>
                         </div>
                         {showProfileDropdown && (
                             <div className="profile-options">

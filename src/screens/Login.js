@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../components/Navbar';
 import { useNavigate, Link } from 'react-router-dom'
 export default function Login() {
-  const [credentials, setCredentials] = useState({ email: "", password: "" })
+  const [credentials, setCredentials] = useState({ email: "", password: "", name: "" })
   let navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -14,7 +14,7 @@ export default function Login() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email: credentials.email, password: credentials.password })
+      body: JSON.stringify({ email: credentials.email, password: credentials.password, name: credentials.name })
 
     });
     const json = await response.json()
@@ -22,6 +22,7 @@ export default function Login() {
     if (json.success) {
       //save the auth toke to local storage and redirect
       localStorage.setItem('userEmail', credentials.email)
+      localStorage.setItem('userName', credentials.name)
       localStorage.setItem('token', json.authToken)
       navigate("/");
 
@@ -40,7 +41,7 @@ export default function Login() {
       <div>
         <Navbar />
       </div>
-      <br /> <br /> <br /><br /><br /> <br /> <br />  <br/>
+      <br /> <br /> <br /><br /><br /> <br /> <br />  <br />
       <div className='container'>
         <form className='w-50 m-auto mt-10 border bg-dark border-success rounded' onSubmit={handleSubmit}>
           <div className="m-3">
