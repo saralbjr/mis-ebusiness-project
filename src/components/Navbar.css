@@ -1,10 +1,55 @@
 #navbar {
-    transition: 0.3s;
-  }
+  transition: 0.3s;
+}
 
-  #navbar.sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-  }
+#navbar.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+/*
+Add these styles to your CSS file */
+.profile-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-dropdown .animated-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.profile-dropdown .animated-button:hover {
+  background-color: #4caf50;
+}
+
+.profile-dropdown .profile-options {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.profile-dropdown .profile-options a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.profile-dropdown .profile-options a:hover {
+  background-color: #f1f1f1;
+}
+
+.profile-dropdown:hover .profile-options {
+  display: block;
+}

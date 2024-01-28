@@ -11,16 +11,16 @@ import './Navbar.css';
 export default function Navbar(props) {
     const [cartView, setCartView] = useState(false);
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-    const [userName, setUserName] = useState('');
+    const [userName, setUserName] = useState('User'); // Default to "User"
 
     const navigate = useNavigate();
     const items = useCart();
     const navbarRef = useRef(null);
 
     useEffect(() => {
-        // ... (existing code)
-
-        // Fetch user name from your authentication system
+        // Fetch user name from your authentication system or database
+        // For now, using a default value "User"
+        // Replace this with actual logic to fetch user name
         const storedUserName = localStorage.getItem('userName');
         if (storedUserName) {
             setUserName(storedUserName);
@@ -35,7 +35,7 @@ export default function Navbar(props) {
         const isConfirmed = window.confirm('Are you sure you want to logout?');
         if (isConfirmed) {
             localStorage.removeItem('token');
-            localStorage.removeItem('userName'); // Remove user name on logout
+            localStorage.removeItem('userName');
             navigate('/login');
         }
     };
@@ -59,6 +59,17 @@ export default function Navbar(props) {
                 }}
             >
                 <div className="container-fluid">
+                    <div className="profile-dropdown">
+                        <div className="animated-button" onClick={handleProfileClick}>
+                            {userName} <span>&#9660;</span>
+                        </div>
+                        {showProfileDropdown && (
+                            <div className="profile-options">
+                                <Link to="/profile">Profile</Link>
+                                <Link to="/edit-profile">Edit Profile</Link>
+                            </div>
+                        )}
+                    </div>
                     <Link className="navbar-brand" to="/">
                         <img src={logoImage} alt="Logo" style={{ width: '100px', height: 'auto' }} />
                     </Link>
@@ -112,18 +123,6 @@ export default function Navbar(props) {
                                         <Cart />
                                     </Modal>
                                 )}
-                                <div className="profile-dropdown">
-                                    <div className="animated-button" onClick={handleProfileClick}>
-                                        {userName}
-                                        {/* Add a down arrow icon or similar for better UX */}
-                                    </div>
-                                    {showProfileDropdown && (
-                                        <div className="profile-options">
-                                            <Link to="/profile">View Profile</Link>
-                                            <Link to="/edit-profile">Edit Profile</Link>
-                                        </div>
-                                    )}
-                                </div>
                                 <button onClick={handleLogout} className="animated-button">
                                     Logout
                                 </button>
