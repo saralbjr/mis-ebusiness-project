@@ -18,6 +18,8 @@ import Admin from './screens/Admin/Admin.js'
 import AdminAdd from './screens/Admin/AdminAdd.js'
 import OrderInfo from './screens/Admin/OrderInfo.js';
 import UserInfo from './screens/Admin/UserInfo.js';
+import EditProfile from './screens/EditProfile.js';
+import UserProfile from './screens/UserProfile.js';
 
 function App() {
   return (
@@ -29,10 +31,12 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/myorder" element={<MyOrder />} />
-            <Route exact path="/admin" element={<Admin/>}/>
+            <Route exact path="/admin" element={<Admin />} />
             <Route path="/admin/add" element={<AdminAdd />} /> {/* Add this route */}
             <Route path="/admin/ordersdata" element={<OrderInfo />} />
             <Route path="/admin/usersdata" element={<UserInfo />} />
+            <Route path="/profile" element={<EditProfile />} />
+            <Route path="/admin/edit-profile" element={<UserProfile />} />
           </Routes>
         </div>
       </Router>
