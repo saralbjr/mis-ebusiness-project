@@ -35,8 +35,8 @@ function App() {
             <Route path="/admin/add" element={<AdminAdd />} /> {/* Add this route */}
             <Route path="/admin/ordersdata" element={<OrderInfo />} />
             <Route path="/admin/usersdata" element={<UserInfo />} />
-            <Route path="/profile" element={<EditProfile />} />
-            <Route path="/admin/edit-profile" element={<UserProfile />} />
+            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/admin/edit-profile" element={<EditProfile />} />
           </Routes>
         </div>
       </Router>

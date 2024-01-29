@@ -18,13 +18,14 @@ export default function Navbar(props) {
     const navbarRef = useRef(null);
 
     useEffect(() => {
-        const storedEmail = localStorage.getItem('userEmail');
+        const storedEmail = localStorage.getItem('userName');
         if (storedEmail) {
-            // Use only the first 5 characters of the email
-            const truncatedEmail = storedEmail.substring(0, 5) + '...';
-            setUserEmail(truncatedEmail);
+            // Extract the part of the email before the first space
+            const firstWord = storedEmail.split(' ')[0];
+            setUserEmail(firstWord);
         }
     }, []);
+
 
     const handleProfileClick = () => {
         setShowProfileDropdown(!showProfileDropdown);

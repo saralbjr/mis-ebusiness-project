@@ -50,6 +50,7 @@ router.post('/createuser', [
 // Authentication a User, No login Requiered
 router.post('/login', [
     body('email', "Enter a Valid Email").isEmail(),
+    body('name', "Enter a Valid Name"),
     body('password', "Password cannot be blank").exists(),
 ], async (req, res) => {
     let success = false
