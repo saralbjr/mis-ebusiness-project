@@ -14,7 +14,7 @@ export default function Login() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email: credentials.email, password: credentials.password, name: credentials.name })
+      body: JSON.stringify({ email: credentials.email, password: credentials.password })
 
     });
     const json = await response.json()
@@ -22,7 +22,6 @@ export default function Login() {
     if (json.success) {
       //save the auth toke to local storage and redirect
       localStorage.setItem('userEmail', credentials.email)
-      localStorage.setItem('userName', credentials.name)
       localStorage.setItem('token', json.authToken)
       navigate("/");
 

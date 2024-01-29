@@ -58,17 +58,7 @@ export default function Navbar(props) {
                 }}
             >
                 <div className="container-fluid">
-                    <div className="profile-dropdown">
-                        <div className="animated-button" onClick={handleProfileClick}>
-                            {userEmail} <span>&#9660;</span>
-                        </div>
-                        {showProfileDropdown && (
-                            <div className="profile-options">
-                                <Link to="/profile">Profile</Link>
-                                <Link to="/edit-profile">Edit Profile</Link>
-                            </div>
-                        )}
-                    </div>
+
                     <Link className="navbar-brand" to="/">
                         <img src={logoImage} alt="Logo" style={{ width: '100px', height: 'auto' }} />
                     </Link>
@@ -98,6 +88,17 @@ export default function Navbar(props) {
                                 </li>
                             )}
                         </ul>
+                        <div className="profile-dropdown">
+                            <div className="animated-button" onClick={handleProfileClick}>
+                                {userEmail} <span>&#9660;</span>
+                            </div>
+                            {showProfileDropdown && (
+                                <div className="profile-options">
+                                    <Link to="/profile">Profile</Link>
+                                    <Link to="/edit-profile">Edit Profile</Link>
+                                </div>
+                            )}
+                        </div>
                         {!localStorage.getItem('token') ? (
                             <form className="d-flex">
                                 <div className="login">

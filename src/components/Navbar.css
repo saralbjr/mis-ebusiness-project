@@ -47,7 +47,7 @@ Add these styles to your CSS file */
 }
 
 .profile-dropdown .profile-options a:hover {
-  background-color: #f1f1f1;
+  background-color: #4caf50;
 }
 
 .profile-dropdown:hover .profile-options {
