@@ -9,7 +9,11 @@ const EditProfile = () => {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+
+    // State variable to track password match
+    const [passwordsMatch, setPasswordsMatch] = useState(true);
 
     // Fetch user details when the component mounts
     useEffect(() => {
@@ -45,6 +49,12 @@ const EditProfile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            setPasswordsMatch(false);
+            return;
+        }
+
         try {
             // Make a request to the backend to update user details
             const response = await fetch('http://localhost:5000/users/update', {
@@ -79,9 +89,9 @@ const EditProfile = () => {
                 <div className="user-info-box">
                     <h1>Edit Profile</h1>
                     <form onSubmit={handleSubmit}>
-                        {/* ... other form inputs ... */}
                         <label>New Username:</label>
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+
                         <label>Password:</label>
                         <div className="password-input">
                             <input
@@ -94,6 +104,21 @@ const EditProfile = () => {
                                 <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                             </span>
                         </div>
+
+                        <label>Confirm Password:</label>
+                        <div className="password-input">
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                            />
+                            <span className="toggle-password" onClick={() => setShowPassword(!showPassword)}>
+                                <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+                            </span>
+                        </div>
+
+                        {!passwordsMatch && <p className="error-message">Passwords do not match.</p>}
                         <button type="submit">Update Profile</button>
                     </form>
                 </div>
