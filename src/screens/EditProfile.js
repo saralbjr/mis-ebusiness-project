@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
+import './EditProfile.css'; // Import your CSS file
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const EditProfile = () => {
     // State variables to store user details
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     // Fetch user details when the component mounts
     useEffect(() => {
@@ -75,12 +79,21 @@ const EditProfile = () => {
                 <div className="user-info-box">
                     <h1>Edit Profile</h1>
                     <form onSubmit={handleSubmit}>
-                        <label>Email:</label>
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                        <label>Name:</label>
+                        {/* ... other form inputs ... */}
+                        <label>New Username:</label>
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
                         <label>Password:</label>
-                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <div className="password-input">
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <span className="toggle-password" onClick={() => setShowPassword(!showPassword)}>
+                                <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+                            </span>
+                        </div>
                         <button type="submit">Update Profile</button>
                     </form>
                 </div>
