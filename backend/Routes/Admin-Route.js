@@ -4,6 +4,8 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const cors = require('cors')
 const dotenv = require('dotenv');
+const bcrypt = require('bcrypt'); // Add bcrypt for password hashing
+const jwt = require('jsonwebtoken');
 dotenv.config();
 
 const mongoURI = process.env.MONGO_URI;
@@ -12,6 +14,8 @@ const collectionName = process.env.COLLECTION_NAME;
 const categoryCollection = process.env.CATEGORY_COLLECTION;
 const userCollection = process.env.USER_COLLECTION;
 const orderDetails = process.env.ORDER_DETAILS_COLLECTION;
+const jwtSecretKey = process.env.JWT_SECRET_KEY; // Add your secret key here
+
 router.use(cors())
 
 // Ensure MongoDB connection is established before setting up routes
@@ -203,5 +207,55 @@ router.delete('/users/ban/:userId', async (req, res) => {
   }
 });
 
+const authenticateUser = async (req, res, next) => {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, jwtSecretKey);
+    req.user = decoded.user;
+    next();
+  } catch (err) {
+    return res.status(401).json({ message: 'Token is not valid' });
+  }
+};
+
+// API endpoint to update user details
+router.put('/users/update', authenticateUser, async (req, res) => {
+  const { email, name, password } = req.body;
+  const userId = req.user._id;
+
+  try {
+    const collection = global.db.collection(userCollection);
+
+    // Optionally, update only non-empty fields
+    const updateFields = {};
+    if (email) updateFields.email = email;
+    if (name) updateFields.name = name;
+    if (password) {
+      // Hash the password before updating
+      const hashedPassword = await bcrypt.hash(password, 10);
+      updateFields.password = hashedPassword;
+    }
+
+    // Update the user in the MongoDB collection
+    const result = await collection.updateOne(
+      { _id: mongodb.ObjectID(userId) },
+      { $set: updateFields }
+    );
+
+    if (result.modifiedCount === 1) {
+      res.json({ success: true, message: 'User details updated successfully' });
+    } else {
+      res.status(404).json({ success: false, message: 'User not found' });
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

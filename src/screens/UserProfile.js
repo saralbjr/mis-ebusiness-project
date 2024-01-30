@@ -10,7 +10,7 @@ const UserInfo = () => {
             <div className="user-info-container">
 
                 <div className="user-info-box">
-                    <h2>User Information</h2>
+                    <h1>User Information</h1>
                     <p>Email: {userEmail}</p>
                     <p>Name: {userName}</p>
                     {/* Other UI elements */}

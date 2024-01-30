@@ -36,7 +36,7 @@ function App() {
             <Route path="/admin/ordersdata" element={<OrderInfo />} />
             <Route path="/admin/usersdata" element={<UserInfo />} />
             <Route path="/profile" element={<UserProfile />} />
-            <Route path="/admin/edit-profile" element={<EditProfile />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
           </Routes>
         </div>
       </Router>
