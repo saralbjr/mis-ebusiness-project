@@ -8,10 +8,11 @@ import Cart from '../screens/Cart';
 import logoImage from './Images/raksi1.png';
 import './Navbar.css';
 
+
 export default function Navbar(props) {
     const [cartView, setCartView] = useState(false);
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-    const [userEmail, setUserEmail] = useState(''); // Default to empty string
+    const [userEmail, setUserEmail] = useState('');
 
     const navigate = useNavigate();
     const items = useCart();
@@ -19,13 +20,10 @@ export default function Navbar(props) {
 
     useEffect(() => {
         const storedEmail = localStorage.getItem('userName');
-        if (storedEmail) {
-            // Extract the part of the email before the first space
-            const firstWord = storedEmail.split(' ')[0];
-            setUserEmail(firstWord);
+        if (localStorage.getItem('token') && storedEmail) {
+            setUserEmail(storedEmail);
         }
     }, []);
-
 
     const handleProfileClick = () => {
         setShowProfileDropdown(!showProfileDropdown);
@@ -89,17 +87,19 @@ export default function Navbar(props) {
                                 </li>
                             )}
                         </ul>
-                        <div className="profile-dropdown">
-                            <div className="animated-button" onClick={handleProfileClick}>
-                                {userEmail} <span>&#9660;</span>
-                            </div>
-                            {showProfileDropdown && (
-                                <div className="profile-options">
-                                    <Link to="/profile">Profile</Link>
-                                    <Link to="/edit-profile">Edit Profile</Link>
+                        {localStorage.getItem('token') && (
+                            <div className="profile-dropdown">
+                                <div className="animated-button" onClick={handleProfileClick}>
+                                    {userEmail && <span>{userEmail} </span>}<span>&#9660;</span>
                                 </div>
-                            )}
-                        </div>
+                                {showProfileDropdown && (
+                                    <div className="profile-options">
+                                        <Link to="/profile">Profile</Link>
+                                        <Link to="/edit-profile">Edit Profile</Link>
+                                    </div>
+                                )}
+                            </div>
+                        )}
                         {!localStorage.getItem('token') ? (
                             <form className="d-flex">
                                 <div className="login">
