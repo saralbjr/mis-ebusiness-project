@@ -117,19 +117,19 @@ const Admin = () => {
   return (
     <>
       <AdminNavBar />
-      <br /> <br /> <br /> <br /> <br/>
+      <br /> <br /> <br /> <br /> <br />
       {loading ? (
         <Loading />
       ) : isLoggedIn ? (
         <>
-        <div className='d-flex justify-content-center'>
-        <Link to="/admin/ordersdata" className="btn btn-success mx-2">
-          View User Orders
-        </Link>
-        <Link to="/admin/usersdata" className="btn btn-success">
-          View User Data
-        </Link>
-      </div>
+          <div className='d-flex justify-content-center'>
+            <Link to="/admin/ordersdata" className="btn btn-success mx-2">
+              View User Orders
+            </Link>
+            <Link to="/admin/usersdata" className="btn btn-success">
+              View User Data
+            </Link>
+          </div>
           <AdminAdd />
           <div className='admin-panel'>
             <h1 className='admin-heading'>Admin Dashboard</h1>

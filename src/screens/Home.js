@@ -3,12 +3,19 @@ import Card from '../components/Card';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Loading from './Loading';
+import { Modal } from 'react-bootstrap'; // Import the Modal and Button components
+
+
 
 export default function Home() {
   const [foodCat, setFoodCat] = useState([]);
   const [foodItems, setFoodItems] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
+
+  const [showModal, setShowModal] = useState(false); // State variable to control modal visibility
+
+  const userName = localStorage.getItem('userName'); // Get userName from localStorage
 
   const loadFoodItems = async () => {
     try {
@@ -35,12 +42,38 @@ export default function Home() {
 
   useEffect(() => {
     loadFoodItems();
+
+    setShowModal(true)
+
+    const modalTimeout = setTimeout(() => {
+      setShowModal(false)
+    }, 3000)
+
+    return () => clearTimeout(modalTimeout)
   }, []);
 
   return (
     <div>
       <div>
         <Navbar />
+        {showModal && (
+          <div className="modal fade show"
+            tabIndex="-1" role="dialog"
+            style={{
+              display: 'block', backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              position: 'fixed', top: '0px', left: '50%', transform: 'translateX(-50%)'
+            }}>
+            <div className="modal-dialog modal-dialog-centered" role="document">
+              <div className="modal-content">
+                <div className="modal-body">
+                  <p>Welcome, {userName}!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showModal && setTimeout(() => setShowModal(false), 2000)}
       </div>
       <br /> <br /> <br /> <br />
       <div>
@@ -87,6 +120,11 @@ export default function Home() {
               </button>
             </div>
             <div className='container'>
+              {/* <Modal show={showModal} onHide={() => setShowModal(false)}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Welcome {userName}</Modal.Title>
+                </Modal.Header>
+              </Modal> */}
               {foodCat !== [] ? (
                 foodCat.map((data) => {
                   return (
