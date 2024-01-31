@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
+import './UserProfile.css'
+
 const UserInfo = () => {
     const [userEmail] = useState(localStorage.getItem('userEmail') || '');
     const [userName] = useState(localStorage.getItem('userName') || '');
@@ -12,7 +14,7 @@ const UserInfo = () => {
                 <div className="user-info-box">
                     <h1>User Information</h1>
                     <p>Email: {userEmail}</p>
-                    <p>Name: {userName}</p>
+                    <p>Username: {userName}</p>
                     {/* Other UI elements */}
                 </div>
             </div>

@@ -3,7 +3,6 @@ import Card from '../components/Card';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Loading from './Loading';
-import { Modal } from 'react-bootstrap'; // Import the Modal and Button components
 
 
 
@@ -120,11 +119,6 @@ export default function Home() {
               </button>
             </div>
             <div className='container'>
-              {/* <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Welcome {userName}</Modal.Title>
-                </Modal.Header>
-              </Modal> */}
               {foodCat !== [] ? (
                 foodCat.map((data) => {
                   return (

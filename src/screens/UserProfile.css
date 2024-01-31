@@ -1,0 +1,23 @@
+.user-info-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.user-info-box {
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.user-info-box h2 {
+  color: #ffffff;
+}
+
+.user-info-box p {
+  margin: 10px 0;
+}

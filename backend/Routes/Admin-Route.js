@@ -248,13 +248,13 @@ router.put('/users/update', authenticateUser, async (req, res) => {
     );
 
     if (result.modifiedCount === 1) {
-      res.json({ success: true, message: 'User details updated successfully' });
+      res.status(200).json({ success: true, message: 'User details updated successfully' });
     } else {
-      res.status(404).json({ success: false, message: 'User not found' });
+      res.status(404).json({ success: false, message: 'User not found or no changes made' });
     }
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Server Error');
+    console.error('Error updating user details:', error.message);
+    res.status(500).json({ success: false, message: 'Server Error' });
   }
 });
 

@@ -20,7 +20,7 @@ const EditProfile = () => {
         const fetchUserDetails = async () => {
             try {
                 // Make a request to the backend to get user details
-                const response = await fetch('http://your-api-url/users/user-info', {
+                const response = await fetch('http://localhost:5000/users/update', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -32,7 +32,9 @@ const EditProfile = () => {
                     const user = await response.json();
                     setEmail(user.email);
                     setName(user.name);
-                    // Password is not fetched for security reasons
+                    setPassword('');  // Reset password field
+                    setConfirmPassword('');  // Reset confirm password field
+                    setPasswordsMatch(true);  // Reset password match status
                 } else {
                     console.error('Failed to fetch user details');
                     // Handle error
@@ -44,6 +46,7 @@ const EditProfile = () => {
 
         fetchUserDetails();
     }, []); // Empty dependency array means this effect runs once on mount
+
 
     // Handle form submission to update user details
     const handleSubmit = async (e) => {
