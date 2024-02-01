@@ -95,7 +95,7 @@ export default function Navbar(props) {
                                 {showProfileDropdown && (
                                     <div className="profile-options">
                                         <Link to="/profile">Profile</Link>
-                                        <Link to="/edit-profile">Edit Profile</Link>
+
                                     </div>
                                 )}
                             </div>
