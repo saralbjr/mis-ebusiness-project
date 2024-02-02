@@ -53,3 +53,14 @@ Add these styles to your CSS file */
 .profile-dropdown:hover .profile-options {
   display: block;
 }
+
+.navbar-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Ensure the text takes the full height of the navbar */
+}
+
+.text-center {
+  text-align: center !important;
+}

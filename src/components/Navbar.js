@@ -87,9 +87,9 @@ export default function Navbar({ showWelcome, welcomeMessage }) {
                             )}
                         </ul>
                         <div className="navbar-text d-flex align-items-center">
-                            <div className="mx-auto">
+                            <div className="text-center w-100">
                                 {showWelcome && (
-                                    <p className="text-center text-white">{welcomeMessage}</p>
+                                    <p className="text-white">{welcomeMessage}</p>
                                 )}
                             </div>
                         </div>
