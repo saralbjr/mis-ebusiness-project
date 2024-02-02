@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import Navbar from '../components/Navbar';
+import './Signup.css'
 export default function Signup() {
   const [credentials, setCredentials] = useState({ name: "", email: "", password: "", geolocation: "" })
   // let [address, setAddress] = useState("");
@@ -81,31 +82,14 @@ export default function Signup() {
             <label htmlFor="email" className="form-label">Email address</label>
             <input type="email" className="form-control" name='email' value={credentials.email} onChange={onChange} aria-describedby="emailHelp" />
           </div>
-          {/* <div className="m-3">
-            <label htmlFor="dobYear" className="form-label">Year of Birth</label>
-      <select className="form-select" name="dobYear" value={credentials.dobYear} onChange={onChange}>
-        <option value="">Select Year</option>
-        {[...Array(100)].map((_, index) => {
-          const year = new Date().getFullYear() - index;
-          return <option key={year} value={year}>{year}</option>;
-        })}
-      </select>
-            </div> */}
-          {/* <div className="m-3">
-              <label htmlFor="address" className="form-label">Address</label>
-              <fieldset>
-                <input type="text" className="form-control" name='address' placeholder='"Click below for fetching address"' value={address} onChange={(e)=>setAddress(e.target.value)} aria-describedby="emailHelp" />
-              </fieldset>
-            </div>
-            <div className="m-3">
-              <button type="button" onClick={handleClick} name="geolocation" className=" btn btn-success">Click for current Location </button>
-            </div> */}
           <div className="m-3">
             <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
             <input type="password" className="form-control" value={credentials.password} onChange={onChange} name='password' />
           </div>
-          <button type="submit" className="m-3 btn btn-success">Submit</button>
-          <Link to="/login" className="m-3 mx-1 btn btn-danger">Already a user</Link>
+          <div className='submit-btn'>
+            <button type="submit" className="btn btn-success">Submit</button>
+            <Link to="/login" className="mx-1 btn btn-danger">Already a user</Link>
+          </div>
         </form>
       </div>
     </div>

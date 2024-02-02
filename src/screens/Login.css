@@ -1,0 +1,10 @@
+.submit-btn {
+  color: #fff; /* Text color */
+  border-color: #218838; /* Border color, adjust as needed */
+  font-size: 14px; /* Adjust the font size as needed */
+  padding: 6px 12px; /* Adjust the padding as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+}

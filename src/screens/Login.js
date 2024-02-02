@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar';
 import { useNavigate, Link } from 'react-router-dom'
+import './Login.css'
+
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" })
   let navigate = useNavigate()
@@ -52,8 +54,10 @@ export default function Login() {
             <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
             <input type="password" className="form-control" value={credentials.password} onChange={onChange} name='password' />
           </div>
-          <button type="submit" className="m-3 btn btn-success">Submit</button>
-          <Link to="/signup" className="m-3 mx-1 btn btn-danger">New User</Link>
+          <div className='submit-btn'>
+            <button type="submit" className="btn btn-success">Login</button>
+            <Link to="/signup" className="mx-1 btn btn-danger">New User</Link>
+          </div>
         </form>
 
       </div>

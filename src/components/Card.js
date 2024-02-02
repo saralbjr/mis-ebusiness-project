@@ -11,6 +11,8 @@ export default function Card(props) {
   const [qty, setQty] = useState(1)
   const [size, setSize] = useState("")
   const priceRef = useRef();
+  const [showMessage, setShowMessage] = useState(false);
+
   // const [btnEnable, setBtnEnable] = useState(false);
   // let totval = 0
   // let price = Object.values(options).map((value) => {
@@ -42,13 +44,13 @@ export default function Card(props) {
     }
     console.log(food)
     console.log(new Date())
-    if (food.length === 0 ) {
+    if (food.length === 0) {
       if (food.size === size) {
         await dispatch({ type: "UPDATE", id: foodItem._id, price: finalPrice, qty: qty })
         return
       }
       else if (food.size !== size) {
-        await dispatch({ type: "ADD", id: foodItem._id, name: foodItem.name, price: finalPrice, qty: qty, size: size,img: props.ImgSrc })
+        await dispatch({ type: "ADD", id: foodItem._id, name: foodItem.name, price: finalPrice, qty: qty, size: size, img: props.ImgSrc })
         console.log("Size different so simply ADD one more to the list")
         return
       }
@@ -59,6 +61,12 @@ export default function Card(props) {
 
 
     // setBtnEnable(true)
+    setShowMessage(true);
+
+    // Hide the message after 2 seconds
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 2000);
 
   }
 
@@ -109,6 +117,11 @@ export default function Card(props) {
           <div className="d-flex flex-column align-items-center justify-content-center mt-auto">
             <button className={'btn btn-success'} onClick={handleAddToCart}>Add to Cart</button>
           </div>
+          {showMessage && (
+            <div className="added-to-cart-message">
+              Added to Cart Successfully
+            </div>
+          )}
         </div>
       </div>
     </div>
