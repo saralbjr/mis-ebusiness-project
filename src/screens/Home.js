@@ -12,9 +12,10 @@ export default function Home() {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const [showModal, setShowModal] = useState(false); // State variable to control modal visibility
+  const [showWelcome, setShowWelcome] = useState(true);
 
   const userName = localStorage.getItem('userName'); // Get userName from localStorage
+
 
   const loadFoodItems = async () => {
     try {
@@ -31,7 +32,8 @@ export default function Home() {
 
       setTimeout(() => {
         setLoading(false);
-      }, 1500)
+        setShowWelcome(false); // Hide welcome message after 3 seconds
+      }, 3000);
 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -41,30 +43,22 @@ export default function Home() {
 
   useEffect(() => {
     loadFoodItems();
-
-    setShowModal(true)
-
-    const modalTimeout = setTimeout(() => {
-      setShowModal(false)
-    }, 3000)
-
-    return () => clearTimeout(modalTimeout)
   }, []);
 
   return (
     <div>
       <div>
-        <Navbar />
-        {showModal && (
+        <Navbar showWelcome={showWelcome} welcomeMessage={`Welcome, ${userName}!`} />
+        {/* {showModal && (
           <div className="modal fade show"
             tabIndex="-1" role="dialog"
             style={{
-              display: 'block', backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              position: 'fixed', top: '0px', left: '50%', transform: 'translateX(-50%)'
+              display: 'block',
+              left: '50%', transform: 'translateX(-50%)'
             }}>
-            <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-dialog modal-dialog-centered small-modal" role="document">
               <div className="modal-content">
-                <div className="modal-body">
+                <div className="modal-body text-center">
                   <p>Welcome, {userName}!</p>
                 </div>
               </div>
@@ -72,7 +66,7 @@ export default function Home() {
           </div>
         )}
 
-        {showModal && setTimeout(() => setShowModal(false), 2000)}
+        {showModal && setTimeout(() => setShowModal(false), 2000)} */}
       </div>
       <br /> <br /> <br /> <br />
       <div>

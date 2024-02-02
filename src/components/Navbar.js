@@ -8,8 +8,7 @@ import Cart from '../screens/Cart';
 import logoImage from './Images/raksi1.png';
 import './Navbar.css';
 
-
-export default function Navbar(props) {
+export default function Navbar({ showWelcome, welcomeMessage }) {
     const [cartView, setCartView] = useState(false);
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
     const [userEmail, setUserEmail] = useState('');
@@ -56,8 +55,8 @@ export default function Navbar(props) {
                     width: '100%',
                 }}
             >
-                <div className="container-fluid">
 
+                <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
                         <img src={logoImage} alt="Logo" style={{ width: '100px', height: 'auto' }} />
                     </Link>
@@ -87,6 +86,13 @@ export default function Navbar(props) {
                                 </li>
                             )}
                         </ul>
+                        <div className="navbar-text d-flex align-items-center">
+                            <div className="mx-auto">
+                                {showWelcome && (
+                                    <p className="text-center text-white">{welcomeMessage}</p>
+                                )}
+                            </div>
+                        </div>
                         {localStorage.getItem('token') && (
                             <div className="profile-dropdown">
                                 <div className="animated-button" onClick={handleProfileClick}>

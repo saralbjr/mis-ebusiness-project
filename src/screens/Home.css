@@ -1,0 +1,9 @@
+/* Add this to your CSS file */
+.small-modal {
+  max-width: fit-content; /* Adjust to 'fit-content' to fit the content exactly */
+  width: auto;
+  margin: 1rem; /* Add margin for a smaller box */
+}
+.text-center {
+  text-align: center;
+}
