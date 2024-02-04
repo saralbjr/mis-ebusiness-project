@@ -86,13 +86,13 @@ export default function Navbar({ showWelcome, welcomeMessage }) {
                                 </li>
                             )}
                         </ul>
-                        <div className="navbar-text d-flex align-items-center">
+                        {/* <div className="navbar-text d-flex align-items-center">
                             <div className="text-center w-100">
                                 {showWelcome && (
                                     <p className="text-white">{welcomeMessage}</p>
                                 )}
                             </div>
-                        </div>
+                        </div> */}
                         {localStorage.getItem('token') && (
                             <div className="profile-dropdown">
                                 <div className="animated-button" onClick={handleProfileClick}>
