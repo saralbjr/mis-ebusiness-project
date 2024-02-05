@@ -51,6 +51,12 @@ export default function Card(props) {
       }
       else if (food.size !== size) {
         await dispatch({ type: "ADD", id: foodItem._id, name: foodItem.name, price: finalPrice, qty: qty, size: size, img: props.ImgSrc })
+
+        setShowMessage(true)
+
+        setTimeout(() => {
+          setShowMessage(false)
+        }, 2000)
         console.log("Size different so simply ADD one more to the list")
         return
       }
