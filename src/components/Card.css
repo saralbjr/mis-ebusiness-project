@@ -49,4 +49,17 @@
   margin-top: 10px;
   border-radius: 5px;
   text-align: center;
+  font-size: 14px; /* Adjust the font size as needed */
+}
+.modal-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  z-index: 999;
+}
+
+.modal-content {
+  text-align: center;
 }
