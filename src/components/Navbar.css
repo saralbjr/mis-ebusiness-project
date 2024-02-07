@@ -64,3 +64,7 @@ Add these styles to your CSS file */
 .text-center {
   text-align: center !important;
 }
+
+.nav-link.active {
+  border-bottom: 2px solid white; /* Change the color and thickness as needed */
+}
