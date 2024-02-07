@@ -31,7 +31,7 @@ const UserInfo = () => {
             <Navbar />
             <div className="user-info-container">
                 <div className="user-info-box">
-                    <h2>Your Information</h2>
+                    <h2>Profile Information</h2>
                     <hr />
                     <div>
                         <div className="info-item">
