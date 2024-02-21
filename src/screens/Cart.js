@@ -2,31 +2,12 @@ import React, { useState } from 'react';
 import Delete from '@material-ui/icons/Delete';
 import { useCart, useDispatchCart } from '../components/ContextReducer';
 import jsPDF from 'jspdf';
-import { loadStripe } from '@stripe/stripe-js'
-// const dotenv = require('dotenv');
-// dotenv.config()
+// import {loadStripe} from '@stripe/stripe-js'
 
 export default function Cart() {
   const [orderSuccess, setOrderSuccess] = useState(false);
   let data = useCart();
   let dispatch = useDispatchCart();
-
-  // const makePayment = async () => {
-  //   const stripe = await loadStripe(process.env.STRIPE_KEY)
-
-  //   const body = {
-  //     products: useCart
-  //   }
-
-  //   const headers = {
-  //     "Content-Type": "application/json"
-  //   }
-
-  //   const response = await fetch(`http://localhost:5000/checkout`, {
-  //     method: "POST",
-  //     headers: headers,
-  //     body: JSON.stringify(body)
-  //   })
 
   const handleCheckOut = async () => {
     let userEmail = localStorage.getItem("userEmail");
@@ -148,5 +129,3 @@ export default function Cart() {
     </div>
   );
 }
-
-
