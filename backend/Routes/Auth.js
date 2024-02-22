@@ -7,6 +7,31 @@ const bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken');
 const fetch = require('../middleware/fetchdetails');
 const jwtSecret = "HaHa"
+// const stripe = require('stripe')('process.env.STRIPE_SECRET')
+
+// router.post('/checkout', async (req, res) => {
+//     try {
+//         const { order_data } = req.body;
+
+//         // Create a PaymentIntent with the order amount and currency
+//         const paymentIntent = await stripe.paymentIntents.create({
+//             amount: calculateOrderAmount(order_data),
+//             currency: 'usd',
+//         });
+
+//         res.json({ clientSecret: paymentIntent.client_secret });
+//     } catch (error) {
+//         console.error('Error creating PaymentIntent:', error);
+//         res.status(500).json({ error: 'Could not create PaymentIntent' });
+//     }
+// })
+
+// const calculateOrderAmount = (orderData) => {
+//     // Calculate the total order amount based on the order data
+//     // You should implement this based on your specific requirements
+//     return 1000; // Example: $10.00
+// };
+
 
 router.post('/createuser', [
     body('email').isEmail(),

@@ -9,6 +9,10 @@ export default function Cart() {
   let data = useCart();
   let dispatch = useDispatchCart();
 
+  const makePayment = async () => {
+
+  }
+
   const handleCheckOut = async () => {
     let userEmail = localStorage.getItem("userEmail");
     let response = await fetch("http://localhost:5000/api/auth/orderData", {
@@ -117,6 +121,9 @@ export default function Cart() {
             <h1 className='fs-2'>Total Price: Rs.{data.reduce((total, food) => total + food.price, 0)}/-</h1>
             <button className='btn bg-success mt-5' onClick={handleCheckOut}>
               Check Out & Download Bill
+            </button>
+            <button className='btn bg-success mt-5' onClick={makePayment}>
+              Check Out
             </button>
           </div>
         )}
