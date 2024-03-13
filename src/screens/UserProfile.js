@@ -8,13 +8,13 @@ const UserInfo = () => {
     const [isEditingEmail, setIsEditingEmail] = useState(false);
     const [isEditingUsername, setIsEditingUsername] = useState(false);
 
-    const handleEditClick = (field) => {
-        if (field === 'email') {
-            setIsEditingEmail(true);
-        } else if (field === 'username') {
-            setIsEditingUsername(true);
-        }
-    };
+    // const handleEditClick = (field) => {
+    //     if (field === 'email') {
+    //         setIsEditingEmail(true);
+    //     } else if (field === 'username') {
+    //         setIsEditingUsername(true);
+    //     }
+    // };
 
     const handleSaveClick = (field) => {
         if (field === 'email') {
@@ -43,12 +43,12 @@ const UserInfo = () => {
                                         value={userEmail}
                                         onChange={(e) => setUserEmail(e.target.value)}
                                     />
-                                    <button className="edit-button" onClick={() => handleSaveClick('email')}>Save</button>
+                                    {/* <button className="edit-button" onClick={() => handleSaveClick('email')}>Save</button> */}
                                 </>
                             ) : (
                                 <>
                                     <p>{userEmail}</p>
-                                    <button className="edit-button" onClick={() => handleEditClick('email')}>Edit</button>
+                                    {/* <button className="edit-button" onClick={() => handleEditClick('email')}>Edit</button> */}
                                 </>
                             )}
                         </div>
@@ -66,7 +66,7 @@ const UserInfo = () => {
                             ) : (
                                 <>
                                     <p>{userName}</p>
-                                    <button className="edit-button" onClick={() => handleEditClick('username')}>Edit</button>
+                                    {/* <button className="edit-button" onClick={() => handleEditClick('username')}>Edit</button> */}
                                 </>
                             )}
                         </div>

@@ -2,16 +2,12 @@ import React, { useState } from 'react';
 import Delete from '@material-ui/icons/Delete';
 import { useCart, useDispatchCart } from '../components/ContextReducer';
 import jsPDF from 'jspdf';
-// import {loadStripe} from '@stripe/stripe-js'
 
 export default function Cart() {
   const [orderSuccess, setOrderSuccess] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(""); // State to track selected payment method
   let data = useCart();
   let dispatch = useDispatchCart();
-
-  const makePayment = async () => {
-
-  }
 
   const handleCheckOut = async () => {
     let userEmail = localStorage.getItem("userEmail");
@@ -23,7 +19,8 @@ export default function Cart() {
       body: JSON.stringify({
         order_data: data,
         email: userEmail,
-        order_date: new Date().toDateString()
+        order_date: new Date().toDateString(),
+        payment_method: paymentMethod // Include selected payment method in the request body
       })
     });
     if (response.status === 200) {
@@ -75,6 +72,28 @@ export default function Cart() {
     pdf.save('order_bill.pdf');
   }
 
+
+  const handleEPayment = async () => {
+    let userEmail = localStorage.getItem("userEmail");
+    let response = await fetch("http://localhost:5000/api/auth/orderData", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        order_data: data,
+        email: userEmail,
+        order_date: new Date().toDateString(),
+        payment_method: "ePayment" // Hardcoded payment method for ePayment
+      })
+    });
+    if (response.status === 200) {
+      window.open("https://esewa.com.np/", "_blank"); // Open eSewa website in a new tab
+      dispatch({ type: "DROP" });
+      setOrderSuccess(true);
+    }
+  }
+
   return (
     <div>
       <div className='container m-auto mt-5 table-responsive table-responsive-sm table-responsive-md'>
@@ -118,13 +137,25 @@ export default function Cart() {
         )}
         {data.length > 0 && (
           <div>
-            <h1 className='fs-2'>Total Price: Rs.{data.reduce((total, food) => total + food.price, 0)}/-</h1>
-            <button className='btn bg-success mt-5' onClick={handleCheckOut}>
-              Check Out & Download Bill
-            </button>
-            <button className='btn bg-success mt-5' onClick={makePayment}>
-              Check Out
-            </button>
+            <h1 className='fs-2 mx-2'>Total Price: Rs.{data.reduce((total, food) => total + food.price, 0)}/-</h1>
+            <label>
+              <input type='radio' name='payment' value='COD' className='mx-2' checked={paymentMethod === "COD"} onChange={() => setPaymentMethod("COD")} /> Cash on Delivery
+            </label>
+            <br />
+            <label>
+              <input type='radio' name='payment' value='ePayment' className='mx-2' checked={paymentMethod === "ePayment"} onChange={() => setPaymentMethod("ePayment")} /> ePayment
+            </label>
+            <br />
+            {/* Conditionally render buttons based on selected payment method */}
+            {paymentMethod === "COD" ? (
+              <button className='btn bg-success mt-2 mx-2' onClick={handleCheckOut}>
+                Check Out
+              </button>
+            ) : paymentMethod === "ePayment" ? (
+              <button className='btn bg-success mt-2 mx-2' onClick={handleEPayment}>
+                ePayment
+              </button>
+            ) : null}
           </div>
         )}
         {orderSuccess && (
