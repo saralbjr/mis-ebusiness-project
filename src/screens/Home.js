@@ -4,18 +4,15 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Loading from './Loading';
 
-
-
 export default function Home() {
   const [foodCat, setFoodCat] = useState([]);
   const [foodItems, setFoodItems] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
-
+  const [sortDirection, setSortDirection] = useState('asc'); // Ascending by default
   const [showWelcome, setShowWelcome] = useState(true);
 
   const userName = localStorage.getItem('userName'); // Get userName from localStorage
-
 
   const loadFoodItems = async () => {
     try {
@@ -45,28 +42,21 @@ export default function Home() {
     loadFoodItems();
   }, []);
 
+  // Function to sort items by price
+  const sortItemsByPrice = (items) => {
+    return items.sort((a, b) => {
+      if (sortDirection === 'asc') {
+        return a.price - b.price;
+      } else {
+        return b.price - a.price;
+      }
+    });
+  };
+
   return (
     <div>
       <div>
         <Navbar showWelcome={showWelcome} welcomeMessage={`Welcome, ${userName}!`} />
-        {/* {showModal && (
-          <div className="modal fade show"
-            tabIndex="-1" role="dialog"
-            style={{
-              display: 'block',
-              left: '50%', transform: 'translateX(-50%)'
-            }}>
-            <div className="modal-dialog modal-dialog-centered small-modal" role="document">
-              <div className="modal-content">
-                <div className="modal-body text-center">
-                  <p>Welcome, {userName}!</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {showModal && setTimeout(() => setShowModal(false), 2000)} */}
       </div>
       <br /> <br /> <br /> <br />
       <div>
@@ -74,10 +64,10 @@ export default function Home() {
           <Loading />
         ) : (
           <div>
-            <div id="carouselExampleFade" className="carousel slide carousel-fade " data-bs-ride="carousel">
-              <div className="carousel-inner " id='carousel'>
-                <div class=" carousel-caption  " style={{ zIndex: "9" }}>
-                  <div className=" d-flex justify-content-center">
+            <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
+              <div className="carousel-inner" id='carousel'>
+                <div className="carousel-caption" style={{ zIndex: "9" }}>
+                  <div className="d-flex justify-content-center">
                     <input
                       className="form-control me-1 w-50 bg-white text-dark"
                       type="search"
@@ -90,18 +80,17 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="carousel-item active" >
-                  <img src="https://cheers.com.np/uploads/banners/085371670808023255176239.jpg" className="d-block w-100  " style={{ filter: "brightness(30%)" }} alt="..." />
-                </div>
-                <div className="carousel-item active" >
-                  <img src="https://cheers.com.np/uploads/banners/17311273094043477467413.jpg" className="d-block w-100  " style={{ filter: "brightness(30%)" }} alt="..." />
+                  <img src="https://cheers.com.np/uploads/banners/085371670808023255176239.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
                 </div>
                 <div className="carousel-item">
-                  <img src="https://cheers.com.np/uploads/banners/4399799185307625465550.jpg" className="d-block w-100 " style={{ filter: "brightness(30%)" }} alt="..." />
+                  <img src="https://cheers.com.np/uploads/banners/17311273094043477467413.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
                 </div>
                 <div className="carousel-item">
-                  <img src="https://cheers.com.np/uploads/banners/7130878260150909072610.jpg" className="d-block w-100 " style={{ filter: "brightness(30%)" }} alt="..." />
+                  <img src="https://cheers.com.np/uploads/banners/4399799185307625465550.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
                 </div>
-                {/* ... (carousel items) */}
+                <div className="carousel-item">
+                  <img src="https://cheers.com.np/uploads/banners/7130878260150909072610.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
+                </div>
               </div>
               <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -112,6 +101,15 @@ export default function Home() {
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
+
+            {/* Sorting UI */}
+            <div className="d-flex justify-content-end m-3">
+              <select onChange={(e) => setSortDirection(e.target.value)} className="form-select w-25">
+                <option value="asc">Price: Low to High</option>
+                <option value="desc">Price: High to Low</option>
+              </select>
+            </div>
+
             <div className='container'>
               {foodCat !== [] ? (
                 foodCat.map((data) => {
@@ -123,13 +121,15 @@ export default function Home() {
                         backgroundImage: "-webkit-linear-gradient(left,rgb(0, 255, 137),rgb(0, 0, 0))"
                       }} />
                       {foodItems !== [] ? (
-                        foodItems.filter((items) => (
-                          items.CategoryName === data.CategoryName &&
-                          items.name.toLowerCase().includes(search.toLowerCase())
-                        )).map(filterItems => (
-                          <div key={filterItems.id} className='col-12 col-md-6 col-lg-3'>
-                            <Card foodName={filterItems.name} item={filterItems}
-                              options={filterItems.options[0]} ImgSrc={filterItems.img}></Card>
+                        sortItemsByPrice(
+                          foodItems.filter((items) => (
+                            items.CategoryName === data.CategoryName &&
+                            items.name.toLowerCase().includes(search.toLowerCase())
+                          ))
+                        ).map(sortedItems => (
+                          <div key={sortedItems.id} className='col-12 col-md-6 col-lg-3'>
+                            <Card foodName={sortedItems.name} item={sortedItems}
+                              options={sortedItems.options[0]} ImgSrc={sortedItems.img}></Card>
                           </div>
                         ))
                       ) : (
