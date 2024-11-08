@@ -105,6 +105,7 @@ export default function Home() {
             {/* Sorting UI */}
             <div className="d-flex justify-content-end m-3">
               <select onChange={(e) => setSortDirection(e.target.value)} className="form-select w-25">
+                <option value="def">Price :</option>
                 <option value="asc">Price: Low to High</option>
                 <option value="desc">Price: High to Low</option>
               </select>
