@@ -14,13 +14,14 @@ export default function Home() {
 
   const userName = localStorage.getItem('userName'); // Get userName from localStorage
 
-  const loadFoodItems = async () => {
+  const loadFoodItems = async (direction = 'asc') => {
     try {
       let response = await fetch("http://localhost:5000/api/auth/foodData", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({ sortOrder: direction }) // Sending sort direction to backend
       });
 
       response = await response.json();
@@ -38,19 +39,14 @@ export default function Home() {
     }
   };
 
+  // Fetch items on component mount and whenever sort direction changes
   useEffect(() => {
-    loadFoodItems();
-  }, []);
+    loadFoodItems(sortDirection);
+  }, [sortDirection]);
 
-  // Function to sort items by price
-  const sortItemsByPrice = (items) => {
-    return items.sort((a, b) => {
-      if (sortDirection === 'asc') {
-        return a.price - b.price;
-      } else {
-        return b.price - a.price;
-      }
-    });
+  // Toggle sort direction and trigger re-fetch
+  const toggleSortDirection = () => {
+    setSortDirection(prevDirection => prevDirection === 'asc' ? 'desc' : 'asc');
   };
 
   return (
@@ -64,6 +60,8 @@ export default function Home() {
           <Loading />
         ) : (
           <div>
+
+
             <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
               <div className="carousel-inner" id='carousel'>
                 <div className="carousel-caption" style={{ zIndex: "9" }}>
@@ -79,18 +77,10 @@ export default function Home() {
                     <button className="btn text-white bg-danger" onClick={() => { setSearch('') }}>X</button>
                   </div>
                 </div>
-                <div className="carousel-item active" >
+                <div className="carousel-item active">
                   <img src="https://cheers.com.np/uploads/banners/085371670808023255176239.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
                 </div>
-                <div className="carousel-item">
-                  <img src="https://cheers.com.np/uploads/banners/17311273094043477467413.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
-                </div>
-                <div className="carousel-item">
-                  <img src="https://cheers.com.np/uploads/banners/4399799185307625465550.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
-                </div>
-                <div className="carousel-item">
-                  <img src="https://cheers.com.np/uploads/banners/7130878260150909072610.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
-                </div>
+                {/* Add more carousel items if needed */}
               </div>
               <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -101,18 +91,12 @@ export default function Home() {
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
-
-            {/* Sorting UI */}
-            <div className="d-flex justify-content-end m-3">
-              <select onChange={(e) => setSortDirection(e.target.value)} className="form-select w-25">
-                <option value="def">Price :</option>
-                <option value="asc">Price: Low to High</option>
-                <option value="desc">Price: High to Low</option>
-              </select>
-            </div>
+            <button onClick={toggleSortDirection} className="btn btn-primary mb-3">
+              Sort by Price: {sortDirection === 'asc' ? "Low to High" : "High to Low"}
+            </button>
 
             <div className='container'>
-              {foodCat !== [] ? (
+              {foodCat.length > 0 ? (
                 foodCat.map((data) => {
                   return (
                     <div className='row mb-3' key={data.id}>
@@ -121,16 +105,14 @@ export default function Home() {
                         height: "4px",
                         backgroundImage: "-webkit-linear-gradient(left,rgb(0, 255, 137),rgb(0, 0, 0))"
                       }} />
-                      {foodItems !== [] ? (
-                        sortItemsByPrice(
-                          foodItems.filter((items) => (
-                            items.CategoryName === data.CategoryName &&
-                            items.name.toLowerCase().includes(search.toLowerCase())
-                          ))
-                        ).map(sortedItems => (
-                          <div key={sortedItems.id} className='col-12 col-md-6 col-lg-3'>
-                            <Card foodName={sortedItems.name} item={sortedItems}
-                              options={sortedItems.options[0]} ImgSrc={sortedItems.img}></Card>
+                      {foodItems.length > 0 ? (
+                        foodItems.filter((item) => (
+                          item.CategoryName === data.CategoryName &&
+                          item.name.toLowerCase().includes(search.toLowerCase())
+                        )).map(filteredItem => (
+                          <div key={filteredItem.id} className='col-12 col-md-6 col-lg-3'>
+                            <Card foodName={filteredItem.name} item={filteredItem}
+                              options={filteredItem.options[0]} ImgSrc={filteredItem.img}></Card>
                           </div>
                         ))
                       ) : (
