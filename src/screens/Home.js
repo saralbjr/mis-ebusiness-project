@@ -9,19 +9,15 @@ export default function Home() {
   const [foodItems, setFoodItems] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
-  const [sortDirection, setSortDirection] = useState('asc'); // Ascending by default
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [sortOrder, setSortOrder] = useState(''); // New state for sorting UI
 
-  const userName = localStorage.getItem('userName'); // Get userName from localStorage
-
-  const loadFoodItems = async (direction = 'asc') => {
+  const loadFoodItems = async () => {
     try {
       let response = await fetch("http://localhost:5000/api/auth/foodData", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ sortOrder: direction }) // Sending sort direction to backend
+        }
       });
 
       response = await response.json();
@@ -30,8 +26,7 @@ export default function Home() {
 
       setTimeout(() => {
         setLoading(false);
-        setShowWelcome(false); // Hide welcome message after 3 seconds
-      }, 3000);
+      }, 1500);
 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -39,31 +34,21 @@ export default function Home() {
     }
   };
 
-  // Fetch items on component mount and whenever sort direction changes
   useEffect(() => {
-    loadFoodItems(sortDirection);
-  }, [sortDirection]);
-
-  // Toggle sort direction and trigger re-fetch
-  const toggleSortDirection = () => {
-    setSortDirection(prevDirection => prevDirection === 'asc' ? 'desc' : 'asc');
-  };
+    loadFoodItems();
+  }, []);
 
   return (
     <div>
-      <div>
-        <Navbar showWelcome={showWelcome} welcomeMessage={`Welcome, ${userName}!`} />
-      </div>
+      <Navbar />
       <br /> <br /> <br /> <br />
       <div>
         {loading ? (
           <Loading />
         ) : (
           <div>
-
-
-            <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
-              <div className="carousel-inner" id='carousel'>
+            <div id="carouselExampleFade" className="carousel slide carousel-fade " data-bs-ride="carousel">
+              <div className="carousel-inner " id='carousel'>
                 <div className="carousel-caption" style={{ zIndex: "9" }}>
                   <div className="d-flex justify-content-center">
                     <input
@@ -80,7 +65,15 @@ export default function Home() {
                 <div className="carousel-item active">
                   <img src="https://cheers.com.np/uploads/banners/085371670808023255176239.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
                 </div>
-                {/* Add more carousel items if needed */}
+                <div className="carousel-item">
+                  <img src="https://cheers.com.np/uploads/banners/17311273094043477467413.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
+                </div>
+                <div className="carousel-item">
+                  <img src="https://cheers.com.np/uploads/banners/4399799185307625465550.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
+                </div>
+                <div className="carousel-item">
+                  <img src="https://cheers.com.np/uploads/banners/7130878260150909072610.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
+                </div>
               </div>
               <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -91,9 +84,21 @@ export default function Home() {
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
-            <button onClick={toggleSortDirection} className="btn btn-primary mb-3">
-              Sort by Price: {sortDirection === 'asc' ? "Low to High" : "High to Low"}
-            </button>
+
+            {/* Sorting Dropdown UI */}
+            <div className="container mt-4 mb-3">
+              <div className="d-flex justify-content-end">
+                <select
+                  className="form-select w-25"
+                  value={sortOrder}
+                  onChange={(e) => setSortOrder(e.target.value)}
+                >
+                  <option value="">Sort by Price</option>
+                  <option value="lowToHigh">Low to High</option>
+                  <option value="highToLow">High to Low</option>
+                </select>
+              </div>
+            </div>
 
             <div className='container'>
               {foodCat.length > 0 ? (
@@ -106,13 +111,13 @@ export default function Home() {
                         backgroundImage: "-webkit-linear-gradient(left,rgb(0, 255, 137),rgb(0, 0, 0))"
                       }} />
                       {foodItems.length > 0 ? (
-                        foodItems.filter((item) => (
-                          item.CategoryName === data.CategoryName &&
-                          item.name.toLowerCase().includes(search.toLowerCase())
-                        )).map(filteredItem => (
-                          <div key={filteredItem.id} className='col-12 col-md-6 col-lg-3'>
-                            <Card foodName={filteredItem.name} item={filteredItem}
-                              options={filteredItem.options[0]} ImgSrc={filteredItem.img}></Card>
+                        foodItems.filter((items) => (
+                          items.CategoryName === data.CategoryName &&
+                          items.name.toLowerCase().includes(search.toLowerCase())
+                        )).map(filterItems => (
+                          <div key={filterItems.id} className='col-12 col-md-6 col-lg-3'>
+                            <Card foodName={filterItems.name} item={filterItems}
+                              options={filterItems.options[0]} ImgSrc={filterItems.img}></Card>
                           </div>
                         ))
                       ) : (
