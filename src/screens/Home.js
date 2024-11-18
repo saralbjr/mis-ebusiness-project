@@ -99,6 +99,33 @@ export default function Home() {
           <Loading />
         ) : (
           <div>
+            {/* Carousel */}
+            <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
+              <div className="carousel-inner" id="carousel">
+                <div className="carousel-item active">
+                  <img src="https://cheers.com.np/uploads/banners/085371670808023255176239.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
+                </div>
+                <div className="carousel-item">
+                  <img src="https://cheers.com.np/uploads/banners/17311273094043477467413.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
+                </div>
+                <div className="carousel-item">
+                  <img src="https://cheers.com.np/uploads/banners/4399799185307625465550.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
+                </div>
+                <div className="carousel-item">
+                  <img src="https://cheers.com.np/uploads/banners/7130878260150909072610.jpg" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
+                </div>
+              </div>
+              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+              </button>
+            </div>
+
+            {/* Sorting Dropdown UI */}
             <div className="container mt-4 mb-3">
               <div className="d-flex justify-content-end">
                 <select
@@ -113,6 +140,7 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Display Sorted Items */}
             <div className="container">
               <div className="row">
                 {sortedItems.map((item) => (
