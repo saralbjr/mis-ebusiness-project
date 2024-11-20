@@ -2,34 +2,38 @@ import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import Loading from './Loading';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'; // Import Skeleton CSS
 
 // Merge Sort implementation
 const mergeSort = (arr, compareFn) => {
-  if (arr.length <= 1) return arr;
+  if (arr.length <= 1) return arr; // Base case: Single element is already sorted.
 
-  const mid = Math.floor(arr.length / 2);
-  const left = arr.slice(0, mid);
-  const right = arr.slice(mid);
+  const mid = Math.floor(arr.length / 2); // Find the middle index
+  const left = arr.slice(0, mid); // Split the array into left half
+  const right = arr.slice(mid); // Split the array into right half
 
+  // Recursively split and merge the array.
   return merge(mergeSort(left, compareFn), mergeSort(right, compareFn), compareFn);
 };
 
 const merge = (left, right, compareFn) => {
-  let result = [];
+  let result = []; // Array to store merged elements.
   let leftIndex = 0;
   let rightIndex = 0;
 
+  // Merge the two arrays based on the comparison function.
   while (leftIndex < left.length && rightIndex < right.length) {
     if (compareFn(left[leftIndex], right[rightIndex]) <= 0) {
-      result.push(left[leftIndex]);
+      result.push(left[leftIndex]); // Take from left if it is smaller or equal.
       leftIndex++;
     } else {
-      result.push(right[rightIndex]);
+      result.push(right[rightIndex]); // Take from right if it is smaller.
       rightIndex++;
     }
   }
 
+  // Append remaining elements from left and right (if any).
   return result.concat(left.slice(leftIndex), right.slice(rightIndex));
 };
 
@@ -38,6 +42,7 @@ export default function Home() {
   const [sortedItems, setSortedItems] = useState([]);
   const [sortOrder, setSortOrder] = useState('');
   const [loading, setLoading] = useState(true);
+  const [sorting, setSorting] = useState(false); // State to track sorting process
 
   const fetchFoodData = async () => {
     try {
@@ -64,21 +69,27 @@ export default function Home() {
       return;
     }
 
-    const compareFn = (a, b) => {
-      const priceA = parseFloat(a.options[0]?.['330ML'] || 0);
-      const priceB = parseFloat(b.options[0]?.['330ML'] || 0);
+    setSorting(true); // Start showing the loading screen
 
-      if (sortOrder === 'lowToHigh') {
-        return priceA - priceB;
-      } else if (sortOrder === 'highToLow') {
-        return priceB - priceA;
-      }
-      return 0;
-    };
+    // Simulate a delay for sorting (for better user experience)
+    setTimeout(() => {
+      const compareFn = (a, b) => {
+        const priceA = parseFloat(a.options[0]?.['330ML'] || 0);
+        const priceB = parseFloat(b.options[0]?.['330ML'] || 0);
 
-    const sortedData = mergeSort(foodItems, compareFn);
+        if (sortOrder === 'lowToHigh') {
+          return priceA - priceB;
+        } else if (sortOrder === 'highToLow') {
+          return priceB - priceA;
+        }
+        return 0;
+      };
 
-    setSortedItems(sortedData);
+      const sortedData = mergeSort(foodItems, compareFn);
+      setSortedItems(sortedData);
+
+      setSorting(false); // Stop showing the loading screen
+    }, 500); // Optional: Add a delay for smoother experience
   };
 
   useEffect(() => {
@@ -95,8 +106,18 @@ export default function Home() {
       <Navbar />
       <br /> <br /> <br /> <br />
       <div>
-        {loading ? (
-          <Loading />
+        {loading || sorting ? ( // Show skeleton when fetching or sorting
+          <div className="container">
+            <div className="row">
+              {[...Array(8)].map((_, index) => (
+                <div key={index} className="col-12 col-md-6 col-lg-3">
+                  <Skeleton height={200} />
+                  <Skeleton height={20} className="mt-2" />
+                  <Skeleton height={20} width="60%" />
+                </div>
+              ))}
+            </div>
+          </div>
         ) : (
           <div>
             {/* Carousel */}
